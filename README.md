@@ -15,7 +15,7 @@ npm ci
 npm run android:build -- --target aarch64 --apk
 ```
 
-Los lanzamientos se publican al crear y subir una etiqueta `v*`, por ejemplo `v0.1.4`. GitHub Actions compila la APK y la adjunta al release con el nombre fijo `PhoGram.apk`, que usa el actualizador de Android.
+Los lanzamientos se publican al crear y subir una etiqueta `v*`, por ejemplo `v0.1.5`. GitHub Actions compila la APK y la adjunta al release con el nombre fijo `PhoGram.apk`, que usa el actualizador de Android.
 
 ## Licencia y origen
 

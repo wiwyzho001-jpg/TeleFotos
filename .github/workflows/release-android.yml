@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   apk:
-    name: Build and publish TeleFotos APK
+    name: Build and publish PhoGram APK
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -44,6 +44,16 @@ jobs:
           workspaces: src-tauri -> target
 
       - run: npm ci
+
+      - name: Set Android version
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const [major, minor, patch] = require('./package.json').version.split('.').map(Number);
+          const versionCode = major * 1_000_000 + minor * 1_000 + patch;
+          fs.writeFileSync('src-tauri/gen/android/app/tauri.properties',
+            `tauri.android.versionName=${major}.${minor}.${patch}\ntauri.android.versionCode=${versionCode}\n`);
+          NODE
 
       - name: Build signed APK
         run: npm run android:build -- --target aarch64 --apk

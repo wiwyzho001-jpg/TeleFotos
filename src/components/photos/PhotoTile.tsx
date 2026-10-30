@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, ImageOff, Play, Star } from "lucide-react";
+import { CheckCircle2, Circle, ImageOff, Play, Star } from "lucide-react";
 import { Api } from "telegram";
 import { mediaCommand } from "@/lib/photos/device";
 import { withMediaConnection } from "@/lib/telegram/mediaConnection";
@@ -253,7 +253,7 @@ export function PhotoTile({
         aria-pressed={selected}
         onClick={onSelect}
       >
-        <CheckCircle2 size={23} />
+        {selected ? <CheckCircle2 size={23} /> : <Circle size={23} />}
       </button>
     </div>
   );

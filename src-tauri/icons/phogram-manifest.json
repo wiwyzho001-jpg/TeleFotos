@@ -1,0 +1,5 @@
+{
+  "default": "../../public/phogram-logo.png",
+  "android_fg": "phogram-launcher-foreground.png",
+  "android_bg": "phogram-transparent.png"
+}

@@ -208,10 +208,11 @@
   opacity: 0;
   filter: drop-shadow(0 1px 3px #000);
 }
-.tf-select.visible,
-.tf-tile:hover .tf-select,
-.tf-tile:focus-within .tf-select {
+.tf-select.visible {
   opacity: 1;
+}
+@media (hover: hover) {
+  .tf-tile:hover .tf-select { opacity: 1; }
 }
 .tf-tile.is-selected .tf-select {
   color: #0b57d0;
