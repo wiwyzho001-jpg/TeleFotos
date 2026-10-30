@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "Language",
-    "description": "Choose the language used across the TeleDrive interface, menus, and notifications.",
+    "description": "Choose the language used across the PhoGram interface, menus, and notifications.",
     "activeLanguage": "Active Language",
     "cardDescription": "Select your preferred language. Changes apply immediately across the application.",
-    "callout": "<strong>Instant Sync:</strong> TeleDrive preserves your language choice locally and automatically applies it across all windows and sessions."
+    "callout": "<strong>Instant Sync:</strong> PhoGram preserves your language choice locally and automatically applies it across all windows and sessions."
   },
   "logout": {
     "button": "Log Out",
@@ -48,11 +48,11 @@
     "syncing": "Syncing...",
     "syncNow": "Sync Now",
     "switchChannel": "Switch Channel",
-    "architecture": "<strong>Decentralized cloud storage:</strong> Your files are uploaded as message documents directly to your private Telegram channel. TeleDrive maintains an indexed manifest pinned in this channel so your folders and files stay synchronized automatically.",
+    "architecture": "<strong>Decentralized cloud storage:</strong> Your files are uploaded as message documents directly to your private Telegram channel. PhoGram maintains an indexed manifest pinned in this channel so your folders and files stay synchronized automatically.",
     "switchDialog": {
       "title": "Switch Storage Channel",
-      "description": "Select a different private Telegram channel to use for TeleDrive files.",
-      "warning": "<strong>Warning:</strong> Switching storage channels resets the local cache. TeleDrive will look for an existing manifest in the selected channel or create a new one.",
+      "description": "Select a different private Telegram channel to use for PhoGram files.",
+      "warning": "<strong>Warning:</strong> Switching storage channels resets the local cache. PhoGram will look for an existing manifest in the selected channel or create a new one.",
       "cancel": "Cancel",
       "confirm": "Confirm"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "Backup cadence",
       "active": "Active",
-      "description": "How often TeleDrive should re-scan your source folders. Only changed files are re-uploaded.",
+      "description": "How often PhoGram should re-scan your source folders. Only changed files are re-uploaded.",
       "off": "Off",
       "every6h": "Every 6 hours",
       "every12h": "Every 12 hours",
@@ -110,7 +110,7 @@
     "cancel": "Cancel",
     "running": "Backing up…",
     "runNow": "Run backup now",
-    "howItWorks": "<strong>How backup works:</strong> TeleDrive walks the folders you pick, diffs against a local manifest, and uploads only new or changed files.",
+    "howItWorks": "<strong>How backup works:</strong> PhoGram walks the folders you pick, diffs against a local manifest, and uploads only new or changed files.",
     "viewBackups": "View Backups",
     "toasts": {
       "maxFolders_one": "At most {{count}} source folder.",
@@ -123,10 +123,10 @@
   },
   "appearance": {
     "title": "Appearance",
-    "description": "Customize the layout appearance and color theme of TeleDrive.",
+    "description": "Customize the layout appearance and color theme of PhoGram.",
     "themeMode": {
       "title": "Theme Mode",
-      "description": "Choose whether TeleDrive uses light, dark, or system-adaptive appearance."
+      "description": "Choose whether PhoGram uses light, dark, or system-adaptive appearance."
     },
     "themes": {
       "light": {
@@ -142,7 +142,7 @@
         "description": "Automatically syncs with your operating system appearance"
       }
     },
-    "callout": "<strong>Theme Synchronization:</strong> TeleDrive uses Google Drive's curated HSL color tokens across both light (`#F8FAFD`) and dark (`#131314`) surfaces, ensuring high contrast and reduced eye strain."
+    "callout": "<strong>Theme Synchronization:</strong> PhoGram uses Google Drive's curated HSL color tokens across both light (`#F8FAFD`) and dark (`#131314`) surfaces, ensuring high contrast and reduced eye strain."
   },
   "storage": {
     "title": "Storage",
@@ -170,11 +170,11 @@
     }
   },
   "about": {
-    "title": "About TeleDrive",
+    "title": "About PhoGram",
     "description": "Learn more about the application, updates, and open-source project.",
-    "logoAlt": "TeleDrive Logo",
+    "logoAlt": "PhoGram Logo",
     "tagline": "Virtual cloud storage client backed by Telegram",
-    "summary": "TeleDrive is an open-source, cross-platform cloud drive client powered by Telegram. It maps your file storage to a private Telegram channel and organizes your files into a virtual hierarchical drive with fast search, preview, and real-time synchronization.",
+    "summary": "PhoGram is an open-source, cross-platform cloud drive client powered by Telegram. It maps your file storage to a private Telegram channel and organizes your files into a virtual hierarchical drive with fast search, preview, and real-time synchronization.",
     "starOnGithub": "Star on GitHub",
     "githubRepository": "GitHub Repository",
     "reportIssue": "Report an Issue",
@@ -186,12 +186,12 @@
     "checkUpdates": "Check for Updates",
     "disclaimer": {
       "title": "Disclaimer",
-      "body": "TeleDrive is an independent open-source client application and is not affiliated with, authorized, maintained, sponsored or endorsed by Telegram FZ-LLC or any of its affiliates."
+      "body": "PhoGram is an independent open-source client application and is not affiliated with, authorized, maintained, sponsored or endorsed by Telegram FZ-LLC or any of its affiliates."
     },
     "toasts": {
       "openLinkFailed": "Failed to open link.",
       "upToDate": "You're up to date!",
-      "latestVersion": "TeleDrive v{{version}} is the latest version."
+      "latestVersion": "PhoGram v{{version}} is the latest version."
     }
   }
 }

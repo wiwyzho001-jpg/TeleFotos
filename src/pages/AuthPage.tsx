@@ -945,12 +945,12 @@ export default function AuthPage() {
         <div className="flex flex-col items-center mb-3 sm:mb-4">
           <Link to="/photos" className="inline-flex items-center gap-2.5 group">
             <img
-              src="/telefotos-logo.png"
-              alt="TeleFotos"
+              src="/phogram-logo.png"
+              alt="PhoGram"
               className="h-8 w-8 sm:h-9 sm:w-9 object-contain transition-transform duration-200 group-hover:scale-105"
             />
             <span className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
-              TeleFotos
+              PhoGram
             </span>
           </Link>
         </div>
@@ -1389,7 +1389,7 @@ export default function AuthPage() {
                       }}
                     />
                     <div className="absolute inset-[5px] flex items-center justify-center">
-                      <img src="/telefotos-logo.png" alt="" className="h-5 w-5 object-contain opacity-80" />
+                      <img src="/phogram-logo.png" alt="" className="h-5 w-5 object-contain opacity-80" />
                     </div>
                   </div>
                   <span className="text-[11px] font-medium text-muted-foreground bg-muted/60 px-3.5 py-1 rounded-full transition-all duration-300">

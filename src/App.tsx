@@ -37,7 +37,7 @@ function SplashLoader({ status }: { status: string }) {
     <div className="flex h-screen w-screen flex-col items-center justify-center bg-background text-foreground gap-4 select-none">
       <div className="flex flex-col items-center gap-4">
         <img
-          src="/telefotos-logo.png"
+          src="/phogram-logo.png"
           alt={t("logoAlt")}
           className="h-16 w-16 object-contain shrink-0"
         />

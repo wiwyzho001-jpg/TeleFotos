@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "Langue",
-    "description": "Choisissez la langue utilisée dans l'interface, les menus et les notifications de TeleDrive.",
+    "description": "Choisissez la langue utilisée dans l'interface, les menus et les notifications de PhoGram.",
     "activeLanguage": "Langue active",
     "cardDescription": "Sélectionnez votre langue préférée. Les modifications s'appliquent immédiatement dans toute l'application.",
-    "callout": "<strong>Synchronisation instantanée :</strong> TeleDrive enregistre votre choix de langue localement et l'applique automatiquement à toutes les fenêtres et sessions."
+    "callout": "<strong>Synchronisation instantanée :</strong> PhoGram enregistre votre choix de langue localement et l'applique automatiquement à toutes les fenêtres et sessions."
   },
   "logout": {
     "button": "Se déconnecter",
@@ -48,11 +48,11 @@
     "syncing": "Synchronisation...",
     "syncNow": "Synchroniser maintenant",
     "switchChannel": "Changer de canal",
-    "architecture": "<strong>Stockage cloud décentralisé :</strong> Vos fichiers sont téléversés directement sous forme de documents dans votre canal Telegram privé. TeleDrive maintient un manifeste indexé épinglé dans ce canal afin que vos dossiers et fichiers restent synchronisés.",
+    "architecture": "<strong>Stockage cloud décentralisé :</strong> Vos fichiers sont téléversés directement sous forme de documents dans votre canal Telegram privé. PhoGram maintient un manifeste indexé épinglé dans ce canal afin que vos dossiers et fichiers restent synchronisés.",
     "switchDialog": {
       "title": "Changer de canal de stockage",
-      "description": "Sélectionnez un autre canal privé Telegram à utiliser pour les fichiers TeleDrive.",
-      "warning": "<strong>Attention :</strong> Le changement de canal réinitialise le cache local. TeleDrive recherchera un manifeste existant ou en créera un nouveau.",
+      "description": "Sélectionnez un autre canal privé Telegram à utiliser pour les fichiers PhoGram.",
+      "warning": "<strong>Attention :</strong> Le changement de canal réinitialise le cache local. PhoGram recherchera un manifeste existant ou en créera un nouveau.",
       "cancel": "Annuler",
       "confirm": "Confirmer"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "Fréquence de sauvegarde",
       "active": "Active",
-      "description": "Fréquence à laquelle TeleDrive analyse vos dossiers sources. Seuls les fichiers modifiés sont renvoyés.",
+      "description": "Fréquence à laquelle PhoGram analyse vos dossiers sources. Seuls les fichiers modifiés sont renvoyés.",
       "off": "Désactivé",
       "every6h": "Toutes les 6 heures",
       "every12h": "Toutes les 12 heures",
@@ -124,12 +124,12 @@
     },
     "progressHint": "Consultez le panneau de progression dans le coin inférieur droit.",
     "cancel": "Annuler",
-    "howItWorks": "<strong>Fonctionnement de la sauvegarde :</strong> TeleDrive analyse les dossiers sélectionnés, compare avec le manifeste local et ne téléverse que les fichiers nouveaux ou modifiés.",
+    "howItWorks": "<strong>Fonctionnement de la sauvegarde :</strong> PhoGram analyse les dossiers sélectionnés, compare avec le manifeste local et ne téléverse que les fichiers nouveaux ou modifiés.",
     "viewBackups": "Voir les sauvegardes"
   },
   "appearance": {
     "title": "Apparence",
-    "description": "Personnalisez l'aspect visuel de TeleDrive sur votre appareil.",
+    "description": "Personnalisez l'aspect visuel de PhoGram sur votre appareil.",
     "theme": {
       "title": "Thème de l'interface",
       "description": "Choisissez entre les modes clair et sombre, ou synchronisez avec votre système d'exploitation.",
@@ -142,7 +142,7 @@
     },
     "themeMode": {
       "title": "Mode de thème",
-      "description": "Choisissez si TeleDrive utilise une apparence claire, sombre ou adaptée au système."
+      "description": "Choisissez si PhoGram utilise une apparence claire, sombre ou adaptée au système."
     },
     "themes": {
       "light": {
@@ -158,7 +158,7 @@
         "description": "Synchronisation automatique avec l'apparence de votre système d'exploitation"
       }
     },
-    "callout": "<strong>Synchronisation des thèmes :</strong> TeleDrive utilise la palette de couleurs HSL de Google Drive en modes clair (`#F8FAFD`) et sombre (`#131314`), garantissant un contraste élevé et réduisant la fatigue oculaire."
+    "callout": "<strong>Synchronisation des thèmes :</strong> PhoGram utilise la palette de couleurs HSL de Google Drive en modes clair (`#F8FAFD`) et sombre (`#131314`), garantissant un contraste élevé et réduisant la fatigue oculaire."
   },
   "storage": {
     "title": "Stockage et Cache",
@@ -206,9 +206,9 @@
     }
   },
   "about": {
-    "title": "À propos de TeleDrive",
+    "title": "À propos de PhoGram",
     "description": "Informations sur l'application, licences et contributeurs.",
-    "appTitle": "TeleDrive Desktop",
+    "appTitle": "PhoGram Desktop",
     "tagline": "Stockage cloud illimité propulsé par votre propre canal privé Telegram.",
     "version": "Version {{version}}",
     "starOnGithub": "Étoiler sur GitHub",
@@ -226,17 +226,17 @@
     "downloadUpdate": "Télécharger la mise à jour",
     "disclaimer": {
       "title": "Avertissement",
-      "body": "TeleDrive est une application cliente open-source indépendante et n'est pas affiliée, autorisée, maintenue, sponsorisée ou approuvée par Telegram FZ-LLC ou l'une de ses filiales."
+      "body": "PhoGram est une application cliente open-source indépendante et n'est pas affiliée, autorisée, maintenue, sponsorisée ou approuvée par Telegram FZ-LLC ou l'une de ses filiales."
     },
-    "logoAlt": "Logo TeleDrive",
-    "summary": "TeleDrive est un client de disque cloud multiplateforme et open-source alimenté par Telegram. Il associe votre stockage à un canal Telegram privé et organise vos fichiers dans un disque hiérarchique virtuel avec recherche rapide, prévisualisation et synchronisation en temps réel.",
+    "logoAlt": "Logo PhoGram",
+    "summary": "PhoGram est un client de disque cloud multiplateforme et open-source alimenté par Telegram. Il associe votre stockage à un canal Telegram privé et organise vos fichiers dans un disque hiérarchique virtuel avec recherche rapide, prévisualisation et synchronisation en temps réel.",
     "architecture": "Architecture de stockage cloud basée sur les canaux",
     "checkingUpdates": "Vérification des mises à jour...",
     "checkUpdates": "Rechercher des mises à jour",
     "toasts": {
       "openLinkFailed": "Échec de l'ouverture du lien.",
       "upToDate": "Vous êtes à jour !",
-      "latestVersion": "TeleDrive v{{version}} est la dernière version."
+      "latestVersion": "PhoGram v{{version}} est la dernière version."
     }
   }
 }

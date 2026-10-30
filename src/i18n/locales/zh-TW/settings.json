@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "語言",
-    "description": "選擇在 TeleDrive 介面中使用的語言。",
+    "description": "選擇在 PhoGram 介面中使用的語言。",
     "activeLanguage": "目前語言",
     "cardDescription": "選擇您偏好的語言。變更將立即在所有視圖中生效。",
-    "callout": "<strong>即時同步：</strong>TeleDrive 會在本地儲存您的語言選擇，並自動套用於所有視窗與工作階段。"
+    "callout": "<strong>即時同步：</strong>PhoGram 會在本地儲存您的語言選擇，並自動套用於所有視窗與工作階段。"
   },
   "logout": {
     "button": "退出",
@@ -48,11 +48,11 @@
     "syncing": "正在同步...",
     "syncNow": "立即同步",
     "switchChannel": "切換頻道",
-    "architecture": "<strong>去中心化雲端儲存</strong>：您的檔案將作為訊息文件直接上傳到您的私人 Telegram 頻道。 TeleDrive 維護固定在此通道中的索引清單，以便您的資料夾和檔案自動保持同步。",
+    "architecture": "<strong>去中心化雲端儲存</strong>：您的檔案將作為訊息文件直接上傳到您的私人 Telegram 頻道。 PhoGram 維護固定在此通道中的索引清單，以便您的資料夾和檔案自動保持同步。",
     "switchDialog": {
       "title": "切換儲存通道",
-      "description": "選擇用於 TeleDrive 檔案的不同私人 Telegram 頻道。",
-      "warning": "<strong>警告：</strong>切換儲存通道會重置本地快取。 TeleDrive 將在所選渠道中查詢現有清單或建立新清單。",
+      "description": "選擇用於 PhoGram 檔案的不同私人 Telegram 頻道。",
+      "warning": "<strong>警告：</strong>切換儲存通道會重置本地快取。 PhoGram 將在所選渠道中查詢現有清單或建立新清單。",
       "cancel": "取消",
       "confirm": "確認"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "備份節奏",
       "active": "積極的",
-      "description": "TeleDrive 應多久重新掃描一次原始檔夾。僅重新上傳更改的檔案。",
+      "description": "PhoGram 應多久重新掃描一次原始檔夾。僅重新上傳更改的檔案。",
       "off": "離開",
       "every6h": "每 6 小時",
       "every12h": "每12小時一次",
@@ -110,7 +110,7 @@
     "cancel": "取消",
     "running": "正在備份...",
     "runNow": "立即執行備份",
-    "howItWorks": "<strong>備份的工作原理</strong>：TeleDrive 會遍歷您選擇的資料夾，與本地清單進行比較，並僅上傳新的或更改的檔案。",
+    "howItWorks": "<strong>備份的工作原理</strong>：PhoGram 會遍歷您選擇的資料夾，與本地清單進行比較，並僅上傳新的或更改的檔案。",
     "viewBackups": "檢視備份",
     "toasts": {
       "maxFolders_one": "最多 {{count}} 個原始檔夾。",
@@ -123,10 +123,10 @@
   },
   "appearance": {
     "title": "外貌",
-    "description": "自定義 TeleDrive 的佈局外觀和顏色主題。",
+    "description": "自定義 PhoGram 的佈局外觀和顏色主題。",
     "themeMode": {
       "title": "主題模式",
-      "description": "選擇 TeleDrive 是否使用淺色、深色或系統自適應外觀。"
+      "description": "選擇 PhoGram 是否使用淺色、深色或系統自適應外觀。"
     },
     "themes": {
       "light": {
@@ -142,7 +142,7 @@
         "description": "自動與您的作業系統外觀同步"
       }
     },
-    "callout": "<strong>主題同步</strong>：TeleDrive 在淺色 (`#F8FAFD`) 和深色 (`#131314`) 表面上使用 Google Drive 精選的 HSL 顏色標記，確保高對比度並減少眼睛疲勞。"
+    "callout": "<strong>主題同步</strong>：PhoGram 在淺色 (`#F8FAFD`) 和深色 (`#131314`) 表面上使用 Google Drive 精選的 HSL 顏色標記，確保高對比度並減少眼睛疲勞。"
   },
   "storage": {
     "title": "貯存",
@@ -170,11 +170,11 @@
     }
   },
   "about": {
-    "title": "關於 TeleDrive",
+    "title": "關於 PhoGram",
     "description": "瞭解有關應用程式、更新和開源專案的更多資訊。",
     "logoAlt": "電信標誌",
     "tagline": "由 Telegram 支援的虛擬雲端儲存客戶端",
-    "summary": "TeleDrive 是一款由 Telegram 提供支援的開源跨平臺雲驅動客戶端。它將您的檔案儲存對映到私有 Telegram 頻道，並將您的檔案組織到虛擬分層驅動器中，並具有快速搜尋、預覽和即時同步功能。",
+    "summary": "PhoGram 是一款由 Telegram 提供支援的開源跨平臺雲驅動客戶端。它將您的檔案儲存對映到私有 Telegram 頻道，並將您的檔案組織到虛擬分層驅動器中，並具有快速搜尋、預覽和即時同步功能。",
     "starOnGithub": "在 GitHub 上給個 Star",
     "githubRepository": "GitHub 儲存庫",
     "reportIssue": "報告問題",
@@ -186,12 +186,12 @@
     "checkUpdates": "檢查更新",
     "disclaimer": {
       "title": "免責宣告",
-      "body": "TeleDrive 是一款獨立的開源客戶端應用程式，不隸屬於 Telegram FZ-LLC 或其任何附屬公司，也不受其授權、維護、贊助或認可。"
+      "body": "PhoGram 是一款獨立的開源客戶端應用程式，不隸屬於 Telegram FZ-LLC 或其任何附屬公司，也不受其授權、維護、贊助或認可。"
     },
     "toasts": {
       "openLinkFailed": "無法開啟連結。",
       "upToDate": "你是最新的！",
-      "latestVersion": "TeleDrive v{{version}} 是最新版本。"
+      "latestVersion": "PhoGram v{{version}} 是最新版本。"
     }
   }
 }

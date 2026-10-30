@@ -107,7 +107,7 @@ export default function PhotoBackupSettings({
         )}
         <p className="tf-notice">
           Android programa revisiones en segundo plano y puede demorarlas para
-          ahorrar batería. Si el sistema detiene TeleFotos, el respaldo continúa
+          ahorrar batería. Si el sistema detiene PhoGram, el respaldo continúa
           cuando vuelvas a abrirla. Las subidas usan una notificación y respetan
           tu cuenta, las carpetas elegidas y el límite de Wi-Fi. No se borran
           los originales.

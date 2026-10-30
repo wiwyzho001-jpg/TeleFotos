@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "Bahasa",
-    "description": "Pilih bahasa yang digunakan di seluruh antarmuka, menu, dan notifikasi TeleDrive.",
+    "description": "Pilih bahasa yang digunakan di seluruh antarmuka, menu, dan notifikasi PhoGram.",
     "activeLanguage": "Bahasa Aktif",
     "cardDescription": "Pilih bahasa preferensi Anda. Perubahan langsung berlaku di seluruh aplikasi.",
-    "callout": "<strong>Sinkronisasi Instan:</strong> TeleDrive menyimpan preferensi bahasa Anda secara lokal dan menerapkannya secara otomatis ke semua jendela dan sesi."
+    "callout": "<strong>Sinkronisasi Instan:</strong> PhoGram menyimpan preferensi bahasa Anda secara lokal dan menerapkannya secara otomatis ke semua jendela dan sesi."
   },
   "logout": {
     "button": "Keluar",
@@ -48,11 +48,11 @@
     "syncing": "Menyinkronkan...",
     "syncNow": "Sinkronkan Sekarang",
     "switchChannel": "Ganti Saluran",
-    "architecture": "<strong>Penyimpanan cloud terdesentralisasi:</strong> Berkas Anda diunggah sebagai dokumen pesan langsung ke saluran Telegram pribadi Anda. TeleDrive mempertahankan manifes terindeks yang disematkan di saluran ini agar berkas Anda selalu sinkron.",
+    "architecture": "<strong>Penyimpanan cloud terdesentralisasi:</strong> Berkas Anda diunggah sebagai dokumen pesan langsung ke saluran Telegram pribadi Anda. PhoGram mempertahankan manifes terindeks yang disematkan di saluran ini agar berkas Anda selalu sinkron.",
     "switchDialog": {
       "title": "Ganti Saluran Penyimpanan",
-      "description": "Pilih saluran Telegram pribadi yang berbeda untuk digunakan pada berkas TeleDrive.",
-      "warning": "<strong>Peringatan:</strong> Mengganti saluran penyimpanan akan mengatur ulang cache lokal. TeleDrive akan mencari manifes yang ada atau membuat yang baru.",
+      "description": "Pilih saluran Telegram pribadi yang berbeda untuk digunakan pada berkas PhoGram.",
+      "warning": "<strong>Peringatan:</strong> Mengganti saluran penyimpanan akan mengatur ulang cache lokal. PhoGram akan mencari manifes yang ada atau membuat yang baru.",
       "cancel": "Batal",
       "confirm": "Konfirmasi"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "Frekuensi pencadangan",
       "active": "Aktif",
-      "description": "Seberapa sering TeleDrive harus memindai ulang folder sumber Anda. Hanya berkas yang berubah yang diunggah ulang.",
+      "description": "Seberapa sering PhoGram harus memindai ulang folder sumber Anda. Hanya berkas yang berubah yang diunggah ulang.",
       "off": "Nonaktif",
       "every6h": "Setiap 6 jam",
       "every12h": "Setiap 12 jam",
@@ -124,12 +124,12 @@
     },
     "progressHint": "Lihat panel progres di sudut kanan bawah.",
     "cancel": "Batal",
-    "howItWorks": "<strong>Cara kerja pencadangan:</strong> TeleDrive memindai folder yang Anda pilih, membandingkannya dengan manifes lokal, dan hanya mengunggah file baru atau yang diubah.",
+    "howItWorks": "<strong>Cara kerja pencadangan:</strong> PhoGram memindai folder yang Anda pilih, membandingkannya dengan manifes lokal, dan hanya mengunggah file baru atau yang diubah.",
     "viewBackups": "Lihat Cadangan"
   },
   "appearance": {
     "title": "Tampilan",
-    "description": "Sesuaikan tampilan visual TeleDrive di perangkat Anda.",
+    "description": "Sesuaikan tampilan visual PhoGram di perangkat Anda.",
     "theme": {
       "title": "Tema Antarmuka",
       "description": "Pilih antara mode terang dan gelap, atau sesuaikan dengan sistem operasi Anda.",
@@ -142,7 +142,7 @@
     },
     "themeMode": {
       "title": "Mode Tema",
-      "description": "Pilih apakah TeleDrive menggunakan tampilan terang, gelap, atau adaptif sistem."
+      "description": "Pilih apakah PhoGram menggunakan tampilan terang, gelap, atau adaptif sistem."
     },
     "themes": {
       "light": {
@@ -158,7 +158,7 @@
         "description": "Secara otomatis disinkronkan dengan tampilan sistem operasi Anda"
       }
     },
-    "callout": "<strong>Sinkronisasi Tema:</strong> TeleDrive menggunakan token warna HSL Google Drive di permukaan terang (`#F8FAFD`) dan gelap (`#131314`), memastikan kontras tinggi dan mengurangi ketegangan mata."
+    "callout": "<strong>Sinkronisasi Tema:</strong> PhoGram menggunakan token warna HSL Google Drive di permukaan terang (`#F8FAFD`) dan gelap (`#131314`), memastikan kontras tinggi dan mengurangi ketegangan mata."
   },
   "storage": {
     "title": "Penyimpanan & Cache",
@@ -206,9 +206,9 @@
     }
   },
   "about": {
-    "title": "Tentang TeleDrive",
+    "title": "Tentang PhoGram",
     "description": "Informasi aplikasi, lisensi, dan kontributor.",
-    "appTitle": "TeleDrive Desktop",
+    "appTitle": "PhoGram Desktop",
     "tagline": "Penyimpanan cloud pribadi tanpa batas didukung oleh saluran Telegram pribadi Anda sendiri.",
     "version": "Versi {{version}}",
     "starOnGithub": "Beri bintang di GitHub",
@@ -226,17 +226,17 @@
     "downloadUpdate": "Unduh Pembaruan",
     "disclaimer": {
       "title": "Penafian",
-      "body": "TeleDrive adalah aplikasi klien sumber terbuka independen dan tidak berafiliasi, diotorisasi, dikelola, disponsori, atau didukung oleh Telegram FZ-LLC atau afiliasinya."
+      "body": "PhoGram adalah aplikasi klien sumber terbuka independen dan tidak berafiliasi, diotorisasi, dikelola, disponsori, atau didukung oleh Telegram FZ-LLC atau afiliasinya."
     },
-    "logoAlt": "Logo TeleDrive",
-    "summary": "TeleDrive adalah klien drive cloud lintas platform sumber terbuka yang didukung oleh Telegram. Ini memetakan penyimpanan file Anda ke saluran Telegram pribadi dan mengatur file Anda ke dalam drive virtual dengan pencarian cepat, pratinjau, dan sinkronisasi waktu nyata.",
+    "logoAlt": "Logo PhoGram",
+    "summary": "PhoGram adalah klien drive cloud lintas platform sumber terbuka yang didukung oleh Telegram. Ini memetakan penyimpanan file Anda ke saluran Telegram pribadi dan mengatur file Anda ke dalam drive virtual dengan pencarian cepat, pratinjau, dan sinkronisasi waktu nyata.",
     "architecture": "Arsitektur penyimpanan cloud berbasis saluran",
     "checkingUpdates": "Memeriksa pembaruan...",
     "checkUpdates": "Periksa Pembaruan",
     "toasts": {
       "openLinkFailed": "Gagal membuka tautan.",
       "upToDate": "Aplikasi sudah versi terbaru!",
-      "latestVersion": "TeleDrive v{{version}} adalah versi terbaru."
+      "latestVersion": "PhoGram v{{version}} adalah versi terbaru."
     }
   }
 }

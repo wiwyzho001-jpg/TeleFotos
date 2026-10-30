@@ -26,6 +26,8 @@ jobs:
           java-version: "21"
 
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install Android SDK and NDK
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358"
@@ -47,11 +49,11 @@ jobs:
         run: npm run android:build -- --target aarch64 --apk
 
       - name: Prepare release asset
-        run: cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk TeleFotos.apk
+        run: cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk PhoGram.apk
 
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
         with:
           name: TeleFotos ${{ github.ref_name }}
           generate_release_notes: true
-          files: TeleFotos.apk
+          files: PhoGram.apk

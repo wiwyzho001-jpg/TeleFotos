@@ -6,7 +6,7 @@ import { androidMedia, mediaCommand } from "@/lib/photos/device";
 import { toast } from "sonner";
 
 const RELEASES_API = "https://api.github.com/repos/wiwyzho001-jpg/TeleFotos/releases/latest";
-const APK_ASSET = "TeleFotos.apk";
+const APK_ASSET = "PhoGram.apk";
 
 type Release = { tag_name: string; body?: string; assets?: Array<{ name: string; browser_download_url: string; digest?: string | null }> };
 function compareVersions(a: string, b: string): number {
@@ -75,7 +75,7 @@ export default function UpdateSection() {
     <div className="space-y-6 select-none max-w-3xl">
       <div>
         <h2 className="text-xl font-semibold tracking-tight text-[#1F1F1F] dark:text-[#E3E3E3]">Actualizaciones</h2>
-        <p className="mt-1 text-sm text-[#444746] dark:text-[#C4C7C5]">Busca e instala manualmente la versión más reciente de TeleFotos.</p>
+        <p className="mt-1 text-sm text-[#444746] dark:text-[#C4C7C5]">Busca e instala manualmente la versión más reciente de PhoGram.</p>
       </div>
       <div className="space-y-5 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs dark:border-white/[0.06] dark:bg-[#0c0d0f]">
         <div className="flex items-center justify-between gap-4">

@@ -1,13 +1,13 @@
 {
   "starPrompt": {
-    "title": "Enjoying TeleDrive? ✨",
-    "description": "If TeleDrive has saved you time or storage costs, leaving a ⭐ on GitHub helps more people discover it and keeps the project alive.",
+    "title": "Enjoying PhoGram? ✨",
+    "description": "If PhoGram has saved you time or storage costs, leaving a ⭐ on GitHub helps more people discover it and keeps the project alive.",
     "starButton": "⭐ Star on GitHub",
     "maybeLater": "Maybe later",
     "dontAskAgain": "Don't ask again"
   },
   "whatsNew": {
-    "title": "What's New in TeleDrive",
+    "title": "What's New in PhoGram",
     "badge": "v{{version}}",
     "features": [
       "Device Backup — auto-mirror local folders to your Telegram channel",

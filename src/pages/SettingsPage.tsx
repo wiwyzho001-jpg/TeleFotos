@@ -19,10 +19,10 @@ function PhotoBackupSection() {
   return phone ? <PhotoBackupSettings phone={phone} onClose={() => {}} embedded /> : null;
 }
 
-function TeleFotosAboutSection() {
+function PhoGramAboutSection() {
   return <section className="space-y-4">
-    <img src="/telefotos-logo.png" alt="TeleFotos" className="h-16 w-16 object-contain" />
-    <h2 className="text-xl font-semibold">TeleFotos</h2>
+    <img src="/phogram-logo.png" alt="PhoGram" className="h-16 w-16 object-contain" />
+    <h2 className="text-xl font-semibold">PhoGram</h2>
     <p>Tu biblioteca de fotos y videos, respaldada en tu canal privado de Telegram.</p>
     <p>Los originales permanecen en tu dispositivo. Puedes elegir las carpetas del respaldo y activar o desactivar la subida automática.</p>
   </section>;
@@ -82,7 +82,7 @@ export default function SettingsPage() {
       id: "about" as const,
       label: t("nav.about"),
       icon: Info,
-      component: TeleFotosAboutSection,
+      component: PhoGramAboutSection,
     },
   ];
 
@@ -183,7 +183,7 @@ export default function SettingsPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div className="flex items-center gap-2.5">
-          <img src="/telefotos-logo.png" alt="TeleFotos" className="h-7 w-7 object-contain" />
+          <img src="/phogram-logo.png" alt="PhoGram" className="h-7 w-7 object-contain" />
           <h2 className="text-lg font-semibold tracking-tight text-[#1F1F1F] dark:text-[#E3E3E3]">
             {isMobile && mobileShowContent
               ? sections.find((s) => s.id === activeSection)?.label ?? t("page.title")

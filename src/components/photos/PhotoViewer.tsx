@@ -23,9 +23,8 @@ import { downloadPhotos, usePhotoDownloads } from "@/lib/photos/downloads";
 import { useAndroidBack } from "@/hooks/useAndroidBack";
 import { mediaErrorMessage } from "@/lib/telegram/mediaConnection";
 import { createPhotoThumbnail } from "@/lib/photos/thumbnail";
-import { readThumbnail, saveThumbnail, thumbnailCacheKey } from "@/lib/photos/thumbnailCache";
+import { originalCacheKey, readOriginal, readThumbnail, saveOriginal, saveThumbnail, thumbnailCacheKey } from "@/lib/photos/thumbnailCache";
 import { useAuthStore } from "@/stores/authStore";
-import { getPhotoThumbnailIfReady } from "./PhotoTile";
 
 export default function PhotoViewer({
   files,
@@ -41,7 +40,6 @@ export default function PhotoViewer({
   const index = files.findIndex((file) => file.id === id);
   const file = files[index];
   const [url, setUrl] = useState("");
-  const [previewUrl, setPreviewUrl] = useState("");
   const [error, setError] = useState("");
   const [progress, setProgress] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -96,7 +94,6 @@ export default function PhotoViewer({
     let objectUrl = "";
     let localPath = "";
     setUrl("");
-    setPreviewUrl("");
     setError("");
     setProgress(0);
     setZoom(1);
@@ -116,19 +113,23 @@ export default function PhotoViewer({
           return;
         }
         const account = useAuthStore.getState().phoneNumber;
-        if (account) {
-          void getPhotoThumbnailIfReady(file, account).then((preview) => {
-            if (alive && preview) setPreviewUrl(preview);
-          }).catch(() => {});
+        const cachedOriginal = account
+          ? await readOriginal(originalCacheKey(file, account))
+          : undefined;
+        let blob = cachedOriginal;
+        if (!blob) {
+          const bytes = await downloadFileToBuffer(
+            file.channelId,
+            file.messageId,
+            (p) => {
+              if (alive) setProgress(p);
+            },
+          );
+          blob = new Blob([new Uint8Array(bytes)], { type: file.mime });
+          if (account) void saveOriginal(originalCacheKey(file, account), blob);
+        } else if (alive) {
+          setProgress(100);
         }
-        const bytes = await downloadFileToBuffer(
-          file.channelId,
-          file.messageId,
-          (p) => {
-            if (alive) setProgress(p);
-          },
-        );
-        let blob = new Blob([new Uint8Array(bytes)], { type: file.mime });
         if (/hei[cf]/i.test(file.mime) || /\.hei[cf]$/i.test(file.name)) {
           const { default: convert } = await import("heic2any");
           const result = await convert({
@@ -204,17 +205,10 @@ export default function PhotoViewer({
         }}
       >
         {!url && !error && (
-          previewUrl ? (
-            <div className="tf-viewer-preview" role="status" aria-label={`Cargando original · ${progress}%`}>
-              <img src={previewUrl} alt={`Vista previa de ${file.name}`} />
-              <div><Loader2 className="animate-spin" /><span>Abriendo original · {progress}%</span></div>
-            </div>
-          ) : (
             <div className="tf-viewer-loading" role="status">
               <Loader2 className="animate-spin" />
               <p>Abriendo original · {progress}%</p>
             </div>
-          )
         )}
         {error && (
           <div className="tf-viewer-loading" role="alert">

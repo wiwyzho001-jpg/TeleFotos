@@ -205,7 +205,7 @@ export default function TelegramAccountSection() {
                     </span>
                     <div className="flex items-center gap-1.5 font-medium text-xs text-[#1F1F1F] dark:text-[#E3E3E3]">
                       <Cloud className="h-3.5 w-3.5 text-[#0B57D0] dark:text-[#8ab4f8]" />
-                      <span>TeleDrive Storage</span>
+                      <span>Almacenamiento de PhoGram</span>
                     </div>
                   </div>
 

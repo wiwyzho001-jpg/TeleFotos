@@ -222,13 +222,13 @@ export default function PhotosLayout() {
           </>
         ) : (
           <>
-            <button className="tf-brand" aria-label="TeleFotos, inicio" onClick={() => changeTab("photos")}>
-              <img src="/telefotos-logo.png" alt="" />
-              <span>TeleFotos</span>
+            <button className="tf-brand" aria-label="PhoGram, inicio" onClick={() => changeTab("photos")}>
+              <img src="/phogram-logo.png" alt="" />
+              <span>PhoGram</span>
             </button>
             <button
               className="tf-avatar"
-              aria-label="Ajustes de TeleFotos"
+              aria-label="Ajustes de PhoGram"
               onClick={() => navigate(authenticated ? "/settings" : "/auth")}
             >
               {profile.photo ? <img src={profile.photo} alt="" /> : profile.name[0].toLocaleUpperCase("es")}

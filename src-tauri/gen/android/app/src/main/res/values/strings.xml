@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">"TeleFotos"</string>
-    <string name="main_activity_title">"TeleFotos"</string>
+    <string name="app_name">PhoGram</string>
+    <string name="main_activity_title">PhoGram</string>
 </resources>

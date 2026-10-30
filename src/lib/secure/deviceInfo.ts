@@ -46,5 +46,5 @@ const OS_LABEL: Record<OS, string> = {
  * Settings → Plan & Devices panel. Example: "TeleDrive Desktop on macOS".
  */
 export function getDeviceName(): string {
-  return `TeleDrive Desktop on ${OS_LABEL[detectOS()]}`;
+  return `PhoGram on ${OS_LABEL[detectOS()]}`;
 }

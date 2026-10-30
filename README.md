@@ -1,10 +1,10 @@
-# TeleFotos
+# PhoGram
 
-Aplicación Android de fotos y videos respaldada en Telegram. TeleFotos organiza medios en álbumes, permite buscarlos, descargarlos y activar el respaldo automático desde el dispositivo.
+Aplicación Android de fotos y videos respaldada en Telegram. PhoGram organiza medios en álbumes, permite buscarlos, descargarlos y activar el respaldo automático desde el dispositivo.
 
 ## Descargar
 
-La APK más reciente se publica en [GitHub Releases](https://github.com/wiwyzho001-jpg/TeleFotos/releases/latest) como `TeleFotos.apk`. Para buscarla desde la app, abre **Ajustes de TeleFotos → Actualizar aplicación → Buscar actualizaciones**. Android solicita confirmar la instalación.
+La APK más reciente se publica en [GitHub Releases](https://github.com/wiwyzho001-jpg/TeleFotos/releases/latest) como `PhoGram.apk`. Para buscarla desde la app, abre **Ajustes de PhoGram → Actualizar aplicación → Buscar actualizaciones**. Android solicita confirmar la instalación.
 
 ## Desarrollo
 
@@ -15,7 +15,7 @@ npm ci
 npm run android:build -- --target aarch64 --apk
 ```
 
-Los lanzamientos se publican al crear y subir una etiqueta `v*`, por ejemplo `v0.1.4`. GitHub Actions compila la APK y la adjunta al release con el nombre fijo `TeleFotos.apk`, que usa el actualizador de Android.
+Los lanzamientos se publican al crear y subir una etiqueta `v*`, por ejemplo `v0.1.4`. GitHub Actions compila la APK y la adjunta al release con el nombre fijo `PhoGram.apk`, que usa el actualizador de Android.
 
 ## Licencia y origen
 

@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "Sprache",
-    "description": "Wählen Sie die Sprache für die Benutzeroberfläche von TeleDrive.",
+    "description": "Wählen Sie die Sprache für die Benutzeroberfläche von PhoGram.",
     "activeLanguage": "Aktive Sprache",
     "cardDescription": "Wählen Sie Ihre bevorzugte Sprache. Änderungen werden sofort angewendet.",
-    "callout": "<strong>Sofortige Synchronisierung:</strong> TeleDrive speichert Ihre Sprachauswahl lokal und wendet sie automatisch auf alle Fenster an."
+    "callout": "<strong>Sofortige Synchronisierung:</strong> PhoGram speichert Ihre Sprachauswahl lokal und wendet sie automatisch auf alle Fenster an."
   },
   "logout": {
     "button": "Abmelden",
@@ -48,11 +48,11 @@
     "syncing": "Synchronisierung...",
     "syncNow": "Jetzt synchronisieren",
     "switchChannel": "Kanal wechseln",
-    "architecture": "<strong>Dezentraler Cloud-Speicher:</strong> Ihre Dateien werden als Nachrichtendokumente direkt auf Ihren privaten Telegram-Kanal hochgeladen. TeleDrive verwaltet ein indiziertes Manifest, das in diesem Kanal angeheftet ist, sodass Ihre Ordner und Dateien automatisch synchronisiert bleiben.",
+    "architecture": "<strong>Dezentraler Cloud-Speicher:</strong> Ihre Dateien werden als Nachrichtendokumente direkt auf Ihren privaten Telegram-Kanal hochgeladen. PhoGram verwaltet ein indiziertes Manifest, das in diesem Kanal angeheftet ist, sodass Ihre Ordner und Dateien automatisch synchronisiert bleiben.",
     "switchDialog": {
       "title": "Speicherkanal wechseln",
-      "description": "Wählen Sie einen anderen privaten Telegram-Kanal zur Verwendung für TeleDrive-Dateien aus.",
-      "warning": "<strong>Warnung:</strong> Beim Wechseln der Speicherkanäle wird der lokale Cache zurückgesetzt. TeleDrive sucht im ausgewählten Kanal nach einem vorhandenen Manifest oder erstellt ein neues.",
+      "description": "Wählen Sie einen anderen privaten Telegram-Kanal zur Verwendung für PhoGram-Dateien aus.",
+      "warning": "<strong>Warnung:</strong> Beim Wechseln der Speicherkanäle wird der lokale Cache zurückgesetzt. PhoGram sucht im ausgewählten Kanal nach einem vorhandenen Manifest oder erstellt ein neues.",
       "cancel": "Stornieren",
       "confirm": "Bestätigen"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "Sicherungsintervall",
       "active": "Aktiv",
-      "description": "Wie oft TeleDrive Ihre Quellordner erneut scannen soll. Nur geänderte Dateien werden erneut hochgeladen.",
+      "description": "Wie oft PhoGram Ihre Quellordner erneut scannen soll. Nur geänderte Dateien werden erneut hochgeladen.",
       "off": "Off",
       "every6h": "Alle 6 Stunden",
       "every12h": "Alle 12 Stunden",
@@ -110,7 +110,7 @@
     "cancel": "Abbrechen",
     "running": "Sicherung läuft…",
     "runNow": "Jetzt sichern",
-    "howItWorks": "<strong>So funktioniert das Backup:</strong> TeleDrive durchsucht die ausgewählten Ordner, gleicht sie mit einem lokalen Manifest ab und lädt nur neue oder geänderte Dateien hoch.",
+    "howItWorks": "<strong>So funktioniert das Backup:</strong> PhoGram durchsucht die ausgewählten Ordner, gleicht sie mit einem lokalen Manifest ab und lädt nur neue oder geänderte Dateien hoch.",
     "viewBackups": "Backups anzeigen",
     "toasts": {
       "maxFolders_one": "Maximal {{count}} Quellordner.",
@@ -123,7 +123,7 @@
   },
   "appearance": {
     "title": "Erscheinungsbild",
-    "description": "Passen Sie das Layout und das Farbdesign von TeleDrive an.",
+    "description": "Passen Sie das Layout und das Farbdesign von PhoGram an.",
     "themeMode": {
       "title": "Design-Modus",
       "description": "Wählen Sie zwischen hellem, dunklem oder an das System angepasstem Design."
@@ -142,7 +142,7 @@
         "description": "Synchronisiert sich automatisch mit Ihrem Betriebssystem"
       }
     },
-    "callout": "<strong>Design-Synchronisation:</strong> TeleDrive verwendet die Farbtokens von Google Drive für helle (`#F8FAFD`) und dunkle (`#131314`) Oberflächen, um hohen Kontrast und geringe Augenbelastung zu gewährleisten."
+    "callout": "<strong>Design-Synchronisation:</strong> PhoGram verwendet die Farbtokens von Google Drive für helle (`#F8FAFD`) und dunkle (`#131314`) Oberflächen, um hohen Kontrast und geringe Augenbelastung zu gewährleisten."
   },
   "storage": {
     "title": "Speicher",
@@ -170,11 +170,11 @@
     }
   },
   "about": {
-    "title": "Über TeleDrive",
+    "title": "Über PhoGram",
     "description": "Erfahren Sie mehr über die Anwendung, Updates und das Open-Source-Projekt.",
-    "logoAlt": "TeleDrive-Logo",
+    "logoAlt": "PhoGram-Logo",
     "tagline": "Virtueller Cloud-Speicher-Client powered by Telegram",
-    "summary": "TeleDrive ist ein quelloffener, plattformübergreifender Cloud-Drive-Client auf Basis von Telegram. Er verbindet Ihren Speicher mit einem privaten Telegram-Kanal und organisiert Dateien in einem virtuellen hierarchischen Laufwerk mit schneller Suche, Vorschau und Echtzeit-Synchronisierung.",
+    "summary": "PhoGram ist ein quelloffener, plattformübergreifender Cloud-Drive-Client auf Basis von Telegram. Er verbindet Ihren Speicher mit einem privaten Telegram-Kanal und organisiert Dateien in einem virtuellen hierarchischen Laufwerk mit schneller Suche, Vorschau und Echtzeit-Synchronisierung.",
     "starOnGithub": "Auf GitHub einen Stern geben",
     "githubRepository": "GitHub-Repository",
     "reportIssue": "Problem melden",
@@ -186,12 +186,12 @@
     "checkUpdates": "Nach Updates suchen",
     "disclaimer": {
       "title": "Haftungsausschluss",
-      "body": "TeleDrive ist eine unabhängige Open-Source-Client-Anwendung und steht in keiner Verbindung zu Telegram FZ-LLC oder verbundenen Unternehmen und wird von diesen weder unterstützt noch betrieben."
+      "body": "PhoGram ist eine unabhängige Open-Source-Client-Anwendung und steht in keiner Verbindung zu Telegram FZ-LLC oder verbundenen Unternehmen und wird von diesen weder unterstützt noch betrieben."
     },
     "toasts": {
       "openLinkFailed": "Link konnte nicht geöffnet werden.",
-      "upToDate": "TeleDrive ist auf dem neuesten Stand!",
-      "latestVersion": "TeleDrive v{{version}} ist die neueste Version."
+      "upToDate": "PhoGram ist auf dem neuesten Stand!",
+      "latestVersion": "PhoGram v{{version}} ist die neueste Version."
     }
   }
 }

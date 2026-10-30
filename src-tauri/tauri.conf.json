@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "TeleFotos",
-  "mainBinaryName": "TeleDrive",
-  "version": "0.1.3",
+  "productName": "PhoGram",
+  "mainBinaryName": "PhoGram",
+  "version": "0.1.4",
   "identifier": "com.telefotos.app",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -13,8 +13,8 @@
   "app": {
     "windows": [
       {
-        "label": "TeleDrive",
-        "title": "TeleFotos",
+        "label": "PhoGram",
+        "title": "PhoGram",
         "width": 1200,
         "height": 800,
         "minWidth": 375,
@@ -42,10 +42,10 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "copyright": "TeleFotos contributors; based on TeleDrive, GPL-3.0",
+    "copyright": "PhoGram contributors; based on TeleDrive, GPL-3.0",
     "category": "Utility",
-    "shortDescription": "Tu biblioteca de fotos y videos en Telegram",
-    "longDescription": "TeleFotos organiza tus fotos y videos en tu canal privado de Telegram.",
+    "shortDescription": "Tus fotos y videos en Telegram",
+    "longDescription": "PhoGram organiza tus fotos y videos en tu canal privado de Telegram.",
     "macOS": {
       "minimumSystemVersion": "10.15",
       "dmg": {

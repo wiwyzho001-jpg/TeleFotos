@@ -652,12 +652,12 @@ export default function DriveLayout() {
                     <div className="px-5 py-3.5 flex items-center justify-between border-b border-slate-200/50 dark:border-white/[0.04]">
                       <div className="flex items-center gap-2.5">
                         <img
-                          src="/teledrive.png"
+                          src="/phogram-logo.png"
                           alt={t("logoAlt")}
                           className="h-8 w-8 object-contain rounded-xl shadow-xs"
                         />
                         <span className="text-xl font-bold tracking-tight text-foreground">
-                          TeleDrive
+                          PhoGram
                         </span>
                       </div>
                     </div>
@@ -723,12 +723,12 @@ export default function DriveLayout() {
           <div className="flex items-center gap-2 shrink-0 min-w-0">
             <Link to="/drive/my-drive" className="flex items-center gap-2.5 group ml-1">
               <img
-                src="/teledrive.png"
+                src="/phogram-logo.png"
                 alt={t("logoAlt")}
                 className="h-8 w-8 object-contain rounded-lg shadow-xs shrink-0 transition-transform duration-200 group-hover:scale-105"
               />
               <span className="hidden sm:inline-block text-xl font-semibold tracking-tight text-foreground">
-                TeleDrive
+                PhoGram
               </span>
             </Link>
           </div>

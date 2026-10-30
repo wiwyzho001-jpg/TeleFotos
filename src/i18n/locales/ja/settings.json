@@ -13,10 +13,10 @@
   },
   "language": {
     "title": "言語",
-    "description": "TeleDrive インターフェース全体で使用する言語を選択します。",
+    "description": "PhoGram インターフェース全体で使用する言語を選択します。",
     "activeLanguage": "現在の言語",
     "cardDescription": "好みの言語を選択してください。変更はすぐに適用されます。",
-    "callout": "<strong>即時同期:</strong> TeleDrive は言語設定をローカルに保存し、すべてのウィンドウに自動的に適用します。"
+    "callout": "<strong>即時同期:</strong> PhoGram は言語設定をローカルに保存し、すべてのウィンドウに自動的に適用します。"
   },
   "logout": {
     "button": "ログアウト",
@@ -48,11 +48,11 @@
     "syncing": "同期中...",
     "syncNow": "今すぐ同期",
     "switchChannel": "チャンネルを切り替える",
-    "architecture": "<strong>分散型クラウド ストレージ:</strong> ファイルはメッセージ ドキュメントとしてプライベート Telegram チャネルに直接アップロードされます。 TeleDrive は、このチャネルに固定されたインデックス付きマニフェストを維持するため、フォルダーとファイルは自動的に同期されます。",
+    "architecture": "<strong>分散型クラウド ストレージ:</strong> ファイルはメッセージ ドキュメントとしてプライベート Telegram チャネルに直接アップロードされます。 PhoGram は、このチャネルに固定されたインデックス付きマニフェストを維持するため、フォルダーとファイルは自動的に同期されます。",
     "switchDialog": {
       "title": "スイッチストレージチャネル",
-      "description": "TeleDrive ファイルに使用する別のプライベート Telegram チャネルを選択します。",
-      "warning": "<strong>警告:</strong> ストレージ チャネルを切り替えると、ローカル キャッシュがリセットされます。 TeleDrive は、選択したチャネルで既存のマニフェストを検索するか、新しいマニフェストを作成します。",
+      "description": "PhoGram ファイルに使用する別のプライベート Telegram チャネルを選択します。",
+      "warning": "<strong>警告:</strong> ストレージ チャネルを切り替えると、ローカル キャッシュがリセットされます。 PhoGram は、選択したチャネルで既存のマニフェストを検索するか、新しいマニフェストを作成します。",
       "cancel": "キャンセル",
       "confirm": "確認する"
     },
@@ -89,7 +89,7 @@
     "cadence": {
       "title": "バックアップの頻度",
       "active": "アクティブ",
-      "description": "TeleDrive がソース フォルダーを再スキャンする頻度。変更されたファイルのみが再アップロードされます。",
+      "description": "PhoGram がソース フォルダーを再スキャンする頻度。変更されたファイルのみが再アップロードされます。",
       "off": "オフ",
       "every6h": "6時間ごと",
       "every12h": "12時間ごと",
@@ -110,7 +110,7 @@
     "cancel": "キャンセル",
     "running": "バックアップ中…",
     "runNow": "今すぐバックアップを実行",
-    "howItWorks": "<strong>バックアップの仕組み:</strong> TeleDrive は選択したフォルダーを調べ、ローカル マニフェストと比較して、新しいファイルまたは変更されたファイルのみをアップロードします。",
+    "howItWorks": "<strong>バックアップの仕組み:</strong> PhoGram は選択したフォルダーを調べ、ローカル マニフェストと比較して、新しいファイルまたは変更されたファイルのみをアップロードします。",
     "viewBackups": "バックアップの表示",
     "toasts": {
       "maxFolders_one": "最大で {{count}} 個のソース フォルダー。",
@@ -123,10 +123,10 @@
   },
   "appearance": {
     "title": "外観",
-    "description": "TeleDrive のレイアウトの外観とカラーテーマをカスタマイズします。",
+    "description": "PhoGram のレイアウトの外観とカラーテーマをカスタマイズします。",
     "themeMode": {
       "title": "テーマモード",
-      "description": "TeleDrive が明るい外観、暗い外観、またはシステムに適応した外観を使用するかどうかを選択します。"
+      "description": "PhoGram が明るい外観、暗い外観、またはシステムに適応した外観を使用するかどうかを選択します。"
     },
     "themes": {
       "light": {
@@ -142,7 +142,7 @@
         "description": "オペレーティング システムの外観と自動的に同期します"
       }
     },
-    "callout": "<strong>テーマの同期:</strong> TeleDrive は、明るい表面 (`#F8FAFD`) と暗い表面 (`#131314`) の両方で Google ドライブの厳選された HSL カラー トークンを使用し、高いコントラストを確保し、目の疲れを軽減します。"
+    "callout": "<strong>テーマの同期:</strong> PhoGram は、明るい表面 (`#F8FAFD`) と暗い表面 (`#131314`) の両方で Google ドライブの厳選された HSL カラー トークンを使用し、高いコントラストを確保し、目の疲れを軽減します。"
   },
   "storage": {
     "title": "ストレージ",
@@ -174,7 +174,7 @@
     "description": "アプリケーション、アップデート、オープンソース プロジェクトの詳細をご覧ください。",
     "logoAlt": "テレドライブのロゴ",
     "tagline": "Telegram が支援する仮想クラウド ストレージ クライアント",
-    "summary": "TeleDrive は、Telegram を利用したオープンソースのクロスプラットフォームのクラウド ドライブ クライアントです。ファイル ストレージをプライベート Telegram チャネルにマッピングし、高速な検索、プレビュー、リアルタイム同期を備えた仮想階層ドライブにファイルを整理します。",
+    "summary": "PhoGram は、Telegram を利用したオープンソースのクロスプラットフォームのクラウド ドライブ クライアントです。ファイル ストレージをプライベート Telegram チャネルにマッピングし、高速な検索、プレビュー、リアルタイム同期を備えた仮想階層ドライブにファイルを整理します。",
     "starOnGithub": "GitHubでスターを付ける",
     "githubRepository": "GitHub リポジトリ",
     "reportIssue": "問題を報告する",
@@ -186,12 +186,12 @@
     "checkUpdates": "アップデートをチェックする",
     "disclaimer": {
       "title": "免責事項",
-      "body": "TeleDrive は独立したオープンソース クライアント アプリケーションであり、Telegram FZ-LLC またはその関連会社と提携、認可、維持、スポンサー、または承認されていません。"
+      "body": "PhoGram は独立したオープンソース クライアント アプリケーションであり、Telegram FZ-LLC またはその関連会社と提携、認可、維持、スポンサー、または承認されていません。"
     },
     "toasts": {
       "openLinkFailed": "リンクを開けませんでした。",
       "upToDate": "最新情報を入手しました!",
-      "latestVersion": "TeleDrive v{{version}} が最新バージョンです。"
+      "latestVersion": "PhoGram v{{version}} が最新バージョンです。"
     }
   }
 }

@@ -54,7 +54,7 @@ export async function downloadPhotos(files: TeleFile[]): Promise<string[]> {
     }
     const failed = files.length - completed.length;
     if (failed) toast.error(`${completed.length} guardados; ${failed} no se pudieron descargar. Puedes reintentarlos.`, { id: toastId });
-    else toast.success(androidMedia ? `${completed.length} originales guardados en la galería, carpeta TeleFotos` : `${completed.length} originales descargados`, { id: toastId });
+    else toast.success(androidMedia ? `${completed.length} originales guardados en la galería, carpeta PhoGram` : `${completed.length} originales descargados`, { id: toastId });
     return completed;
   } finally { usePhotoDownloads.setState({ running: false }); }
 }
