@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerabilities
+    url: https://github.com/senapati484/teledrive/security/advisories/new
+    about: Please report security vulnerabilities privately using our security advisory process.
+  - name: Official Website & Docs
+    url: https://www.teledrive.space
+    about: Learn more about TeleDrive and download the latest client builds.
+  - name: Community Discussions & Questions
+    url: https://github.com/senapati484/teledrive/discussions
+    about: Ask questions, share feedback, or discuss with the community.

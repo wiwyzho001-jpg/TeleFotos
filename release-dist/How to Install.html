@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Install TeleDrive on macOS</title>
+  <style>
+    :root {
+      --bg: #0f1011;
+      --card-bg: #1e1f20;
+      --border: #2d2f31;
+      --text-main: #f1f3f4;
+      --text-muted: #9aa0a6;
+      --primary: #8ab4f8;
+      --primary-bg: rgba(138, 180, 248, 0.12);
+      --accent: #81c995;
+      --accent-bg: rgba(129, 201, 149, 0.12);
+      --warning: #fdd663;
+      --warning-bg: rgba(253, 214, 99, 0.12);
+      --code-bg: #131314;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --border: #e0e0e0;
+        --text-main: #202124;
+        --text-muted: #5f6368;
+        --primary: #1a73e8;
+        --primary-bg: #e8f0fe;
+        --accent: #1e8e3e;
+        --accent-bg: #e6f4ea;
+        --warning: #b06000;
+        --warning-bg: #fef7e0;
+        --code-bg: #f1f3f4;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary-bg);
+      color: var(--primary);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .badge-recommend {
+      background: var(--accent-bg);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg);
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      background: var(--primary);
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+    .step-text strong {
+      color: var(--text-main);
+    }
+    code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+      font-size: 13px;
+    }
+    .callout {
+      background: var(--warning-bg);
+      border: 1px solid rgba(253, 214, 99, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .callout-title {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--warning);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .callout-desc {
+      font-size: 13px;
+      color: var(--text-main);
+      margin: 0;
+    }
+    .faq {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-badge">
+        <span>⚡</span> TeleDrive for macOS
+      </div>
+      <h1>Installation Guide</h1>
+      <p class="subtitle">Quick setup instructions for Apple Silicon (M1/M2/M3/M4) & Intel Macs</p>
+    </div>
+
+    <!-- Option 1: 1-Click Installer -->
+    <div class="card">
+      <span class="badge-recommend">Recommended • 1-Click Setup</span>
+      <h2>⚡ Option 1: Automatic 1-Click Installer</h2>
+      <p>Bypasses macOS Gatekeeper download verification automatically without requiring any manual Terminal commands.</p>
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">Double-click <strong>Install TeleDrive.command</strong> in this disk image.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">Terminal will open and automatically copy TeleDrive into <code>/Applications</code>, clear the download quarantine flag, and launch the app!</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">Once finished, close Terminal and enjoy TeleDrive!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 2: Drag and Drop -->
+    <div class="card">
+      <h2>📂 Option 2: Traditional Drag-and-Drop</h2>
+      <p>Standard macOS drag-and-drop installation into your Applications folder.</p>
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">Drag <strong>TeleDrive</strong> into the <strong>Applications</strong> shortcut folder.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">Open <strong>TeleDrive</strong> from your Applications folder or Spotlight.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">
+          <span>⚠️</span> If macOS displays "cannot be verified" or "Apple cannot check for malicious software":
+        </div>
+        <p class="callout-desc">
+          Because TeleDrive is free, open-source software, macOS Gatekeeper may show a security notice on first launch:
+          <br><br>
+          1. Open <strong>System Settings</strong>  &rarr; <strong>Privacy & Security</strong>.<br>
+          2. Scroll down to the <strong>Security</strong> section.<br>
+          3. Click <strong>"Open Anyway"</strong> next to TeleDrive.<br><br>
+          <em>(Or in Terminal, simply run: <code>xattr -cr /Applications/TeleDrive.app</code>)</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      TeleDrive is 100% free and open-source. Your Telegram session and storage keys remain strictly on your local device.
+    </div>
+  </div>
+</body>
+</html>

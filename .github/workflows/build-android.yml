@@ -1,0 +1,127 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+      - pro
+      - '0.*'
+      - '[0-9]+.[0-9]+.[0-9]+'
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type (debug or release)'
+        required: false
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      NDK_HOME: /usr/local/lib/android/sdk/ndk/27.1.12297006
+      GRADLE_OPTS: "-Dorg.gradle.internal.http.connectionTimeout=120000 -Dorg.gradle.internal.http.socketTimeout=120000"
+      JAVA_OPTS: "-Dorg.gradle.internal.http.connectionTimeout=120000 -Dorg.gradle.internal.http.socketTimeout=120000"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Android NDK
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;27.1.12297006"
+
+      - name: Install npm dependencies
+        run: npm ci
+        working-directory: .
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Initialize Android project
+        run: npm run tauri android init -- --ci --skip-targets-install
+
+      - name: Pre-download and verify Gradle wrapper
+        run: |
+          DIST_DIR="$HOME/.gradle/wrapper/dists/gradle-8.14.3-bin/cv11ve7ro1n3o1j4so8xd9n66"
+          mkdir -p "$DIST_DIR"
+          if [ ! -f "$DIST_DIR/gradle-8.14.3-bin.zip.ok" ]; then
+            echo "Pre-fetching Gradle 8.14.3 distribution..."
+            curl -fL --retry 5 --retry-delay 3 --connect-timeout 30 \
+              -o "$DIST_DIR/gradle-8.14.3-bin.zip" \
+              https://services.gradle.org/distributions/gradle-8.14.3-bin.zip
+          fi
+          cd src-tauri/gen/android
+          chmod +x gradlew
+          ./gradlew --version
+
+      - name: Build Android APK (debug)
+        run: npx tauri android build --apk --ci --debug
+
+      - name: Build Android APK (release)
+        run: npx tauri android build --apk --ci
+
+      - name: Organize APK deliverables
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          mkdir -p "distribution/v${VERSION}"
+          mkdir -p release-dist/apk
+          for f in $(find src-tauri/gen/android/app/build/outputs/apk -type f -name "*.apk"); do
+            fname=$(basename "$f")
+            echo "Found APK: $f ($fname)"
+            cp "$f" "release-dist/apk/$fname"
+            if [[ "$fname" == *"release"* ]]; then
+              cp "$f" "release-dist/apk/teledrive-v${VERSION}-universal-release.apk"
+              cp "$f" "distribution/v${VERSION}/teledrive.apk"
+              echo "✓ Staged distribution/v${VERSION}/teledrive.apk"
+            fi
+            if [[ "$fname" == *"debug"* ]]; then
+              cp "$f" "release-dist/apk/teledrive-v${VERSION}-universal-debug.apk"
+            fi
+          done
+          ls -lh release-dist/apk/
+
+      - name: Upload Android APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: teledrive-android-apk
+          path: |
+            release-dist/apk/*.apk
+            src-tauri/gen/android/app/build/outputs/bundle/**/*.aab
+          if-no-files-found: warn
+          retention-days: 30
+

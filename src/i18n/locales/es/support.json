@@ -1,0 +1,21 @@
+{
+  "starPrompt": {
+    "title": "¿Te gusta TeleFotos? ✨",
+    "description": "Si TeleFotos te ayuda a ahorrar tiempo o espacio, puedes apoyar el proyecto compartiéndolo con otras personas.",
+    "starButton": "Apoyar el proyecto",
+    "maybeLater": "Quizá más tarde",
+    "dontAskAgain": "No volver a preguntar"
+  },
+  "whatsNew": {
+    "title": "Novedades de TeleFotos",
+    "badge": "v{{version}}",
+    "features": [
+      "Respaldo del dispositivo: guarda automáticamente las carpetas elegidas en tu canal de Telegram",
+      "Interfaz en 11 idiomas",
+      "Mejoras para administrar archivos con arrastrar y soltar",
+      "Inicio más rápido gracias a la caché local de archivos",
+      "Compatibilidad con Android para respaldar tus fotos y videos en Telegram 🤖"
+    ],
+    "close": "Cerrar"
+  }
+}
