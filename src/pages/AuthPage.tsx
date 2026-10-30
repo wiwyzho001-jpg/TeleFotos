@@ -303,7 +303,7 @@ function BackButton({ onClick, disabled, label }: { onClick: () => void; disable
       onClick={onClick}
       className="w-full h-9 rounded-full hover:bg-slate-100 dark:hover:bg-white/[0.05] flex gap-1.5 justify-center items-center text-xs font-medium text-[#0B57D0] dark:text-[#A8C7FA] transition-all duration-200 cursor-pointer"
     >
-      <ArrowLeft className="h-3 w-3" />
+      <ArrowLeft className="size-[17.3px]" />
       {label}
     </Button>
   );

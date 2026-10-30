@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getVersion } from "@tauri-apps/api/app";
 import { Download, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,20 @@ export default function UpdateSection() {
   const [release, setRelease] = useState<Release | null>(null);
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    void getVersion()
+      .then((version) => {
+        if (active) setCurrentVersion(version);
+      })
+      .catch((cause) => {
+        console.warn("No se pudo leer la versión instalada:", cause);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   async function checkForUpdates() {
     setChecking(true);

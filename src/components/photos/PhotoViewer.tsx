@@ -173,7 +173,7 @@ export default function PhotoViewer({
     >
       <header>
         <button ref={closeRef} aria-label="Cerrar foto" onClick={onClose}>
-          <ArrowLeft />
+          <ArrowLeft size={29} />
         </button>
         <span>
           {new Date(photoDate(file)).toLocaleDateString("es", {

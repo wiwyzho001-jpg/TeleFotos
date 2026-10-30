@@ -17,13 +17,14 @@ export const Toaster = ({ ...props }: ToasterProps) => {
       theme={activeTheme}
       className="toaster group"
       position="bottom-right"
+      duration={2000}
       richColors={false}
       closeButton
       gap={10}
       offset="20px"
       icons={{
         success: (
-          <div className="flex items-center justify-center h-8 w-8 rounded-full bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200/80 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400 shrink-0 shadow-xs">
+          <div className="phogram-toast-success-icon flex items-center justify-center h-8 w-8 rounded-full shrink-0">
             <Check className="h-4 w-4 stroke-[2.5]" />
           </div>
         ),

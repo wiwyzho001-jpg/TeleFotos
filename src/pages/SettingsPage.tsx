@@ -45,42 +45,49 @@ export default function SettingsPage() {
     {
       id: "account" as const,
       label: t("nav.account"),
+      description: "Gestiona tu cuenta conectada",
       icon: Smartphone,
       component: TelegramAccountSection,
     },
     {
       id: "backup" as const,
       label: "Respaldo de fotos y videos",
+      description: "Configuración de respaldo",
       icon: Shield,
       component: PhotoBackupSection,
     },
     {
       id: "appearance" as const,
       label: t("nav.appearance"),
+      description: "Temas, colores y diseño",
       icon: Eye,
       component: AppearanceSection,
     },
     {
       id: "language" as const,
       label: t("nav.language"),
+      description: "Selecciona el idioma de la aplicación",
       icon: Languages,
       component: LanguageSection,
     },
     {
       id: "storage" as const,
       label: t("nav.storage"),
+      description: "Gestiona el espacio en tu dispositivo",
       icon: HardDrive,
       component: StorageSection,
     },
     {
       id: "updates" as const,
       label: "Actualizar aplicación",
+      description: "Busca y descarga la última versión",
       icon: Download,
       component: UpdateSection,
     },
     {
       id: "about" as const,
       label: t("nav.about"),
+      description: "Información de la aplicación",
       icon: Info,
       component: PhoGramAboutSection,
     },
@@ -93,13 +100,22 @@ export default function SettingsPage() {
     setMobileShowContent(true);
   };
 
+  const returnToSettingsRoot = () => {
+    setMobileShowContent(false);
+    setActiveSection("account");
+  };
+
   // Logout state
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   useAndroidBack(() => {
     if (logoutDialogOpen) { if (!isLoggingOut) setLogoutDialogOpen(false); return true; }
-    if (isMobile && mobileShowContent) setMobileShowContent(false);
-    else navigate("/photos");
+    if (mobileShowContent || activeSection !== "account") {
+      // Back from any settings section returns to the settings list first.
+      returnToSettingsRoot();
+    } else {
+      navigate("/photos");
+    }
     return true;
   });
 
@@ -164,39 +180,42 @@ export default function SettingsPage() {
 
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-background text-foreground select-none">
+    <div className="tf-settings flex flex-col h-screen overflow-hidden bg-background text-foreground select-none">
       {/* Topbar Settings Header */}
-      <header className="flex items-center gap-3 px-4 md:px-6 h-[calc(3.5rem+var(--safe-area-top,2.5rem))] md:h-16 pt-[var(--safe-area-top,2.5rem)] md:pt-0 shrink-0 bg-background border-b md:border-b-0 border-slate-200/60 dark:border-white/[0.04]">
+      <header className="tf-settings-header flex items-center justify-between gap-3 px-4 md:px-6 h-[calc(3.5rem+var(--safe-area-top,2.5rem))] md:h-16 pt-[var(--safe-area-top,2.5rem)] md:pt-0 shrink-0 bg-background border-b md:border-b-0 border-slate-200/60 dark:border-white/[0.04]">
+        <div className="flex items-center gap-3 min-w-0">
         <Button
           variant="ghost"
           size="icon"
           className="rounded-full h-10 w-10 hover:bg-[#EDF2FC] dark:hover:bg-[#1f2124] text-[#444746] dark:text-[#C4C7C5] hover:text-[#1F1F1F] dark:hover:text-[#E3E3E3] cursor-pointer transition-colors"
           onClick={() => {
-            if (isMobile && mobileShowContent) {
-              setMobileShowContent(false);
+            if (mobileShowContent || activeSection !== "account") {
+              returnToSettingsRoot();
             } else {
               navigate("/photos");
             }
           }}
-          title="Volver a Fotos"
+          title={mobileShowContent || activeSection !== "account" ? "Volver a Configuración" : "Volver a Fotos"}
+          aria-label={mobileShowContent || activeSection !== "account" ? "Volver a Configuración" : "Volver a Fotos"}
         >
-          <ArrowLeft className="h-5 w-5" />
+          <ArrowLeft className="size-[29px]" />
         </Button>
-        <div className="flex items-center gap-2.5">
-          <img src="/phogram-logo.png" alt="PhoGram" className="h-7 w-7 object-contain" />
-          <h2 className="text-lg font-semibold tracking-tight text-[#1F1F1F] dark:text-[#E3E3E3]">
-            {isMobile && mobileShowContent
-              ? sections.find((s) => s.id === activeSection)?.label ?? t("page.title")
-              : t("page.title")}
-          </h2>
+          <div className="min-w-0">
+            <h2 className="text-lg font-semibold tracking-tight text-[#1F1F1F] dark:text-[#E3E3E3]">
+              {isMobile && mobileShowContent
+                ? sections.find((s) => s.id === activeSection)?.label ?? t("page.title")
+                : t("page.title")}
+            </h2>
+          </div>
         </div>
+        <img src="/phogram-logo.png" alt="PhoGram" className="h-7 w-7 object-contain shrink-0" />
       </header>
 
       {/* Main settings body */}
       <div className="flex-1 flex overflow-hidden">
         {/* Desktop Split View: Nav List */}
         {(!isMobile || !mobileShowContent) && (
-          <aside className="w-full md:w-64 shrink-0 overflow-y-auto px-3 py-2 pb-[max(var(--safe-area-bottom,1.5rem),1.5rem)] md:pb-2 flex flex-col justify-between">
+          <aside className="tf-settings-list w-full md:w-64 shrink-0 overflow-y-auto px-3 py-2 pb-[max(var(--safe-area-bottom,1.5rem),1.5rem)] md:pb-2 flex flex-col justify-between">
             <div className="space-y-1">
               {sections.map((sec) => {
                 const Icon = sec.icon;
@@ -204,18 +223,22 @@ export default function SettingsPage() {
                 return (
                   <button
                     key={sec.id}
+                    data-tone={sec.id}
                     onClick={() => (isMobile ? handleMobileSelect(sec.id) : setActiveSection(sec.id))}
-                    className={`w-full flex items-center justify-between gap-3.5 px-4 h-12 md:h-10 rounded-2xl md:rounded-full text-sm font-medium transition-colors text-left cursor-pointer ${
+                    className={`tf-settings-item w-full flex items-center justify-between gap-3.5 px-4 h-12 md:h-10 rounded-2xl md:rounded-full text-sm font-medium transition-colors text-left cursor-pointer ${
                       isSelected && !isMobile
                         ? "bg-[#C2E7FF] dark:bg-[#004A77]/60 text-[#001D35] dark:text-[#C2E7FF] font-semibold"
                         : "text-[#444746] dark:text-[#C4C7C5] hover:bg-[#F0F4F9] dark:hover:bg-white/[0.04] active:bg-[#F0F4F9] dark:active:bg-white/[0.06] hover:text-[#1F1F1F] dark:hover:text-[#E3E3E3]"
                     }`}
                   >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <Icon className={`h-5 w-5 md:h-4.5 md:w-4.5 shrink-0 ${isSelected && !isMobile ? "text-[#0B57D0] dark:text-[#8ab4f8]" : "text-[#444746] dark:text-[#C4C7C5]"}`} />
-                      <span className="truncate">{sec.label}</span>
+                    <div className="tf-settings-item-content flex items-center gap-3.5 min-w-0">
+                      <span className="tf-settings-icon"><Icon /></span>
+                      <span className="tf-settings-copy">
+                        <strong>{sec.label}</strong>
+                        <small>{sec.description}</small>
+                      </span>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-[#747775]/60 dark:text-[#9aa0a6]/60 shrink-0 md:hidden" />
+                    <ChevronRight className="tf-settings-chevron h-[19.2px] w-[19.2px] text-[#747775]/60 dark:text-[#9aa0a6]/60 shrink-0 md:hidden" />
                   </button>
                 );
               })}
@@ -225,7 +248,7 @@ export default function SettingsPage() {
             <div className="pt-4 border-t border-slate-200/60 dark:border-white/[0.04] mb-2">
               <button
                 onClick={() => setLogoutDialogOpen(true)}
-                className="w-full flex items-center gap-3.5 px-4 h-12 md:h-10 rounded-2xl md:rounded-full text-sm font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-colors text-left cursor-pointer"
+                className="tf-settings-logout w-full flex items-center gap-3.5 px-4 h-12 md:h-10 rounded-2xl md:rounded-full text-sm font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-colors text-left cursor-pointer"
               >
                 <svg
                   className="h-4.5 w-4.5 shrink-0 text-rose-500"
@@ -240,7 +263,8 @@ export default function SettingsPage() {
                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                   />
                 </svg>
-                <span>{t("logout.button")}</span>
+                <span className="tf-settings-copy"><strong>{t("logout.button")}</strong><small>Desconecta tu cuenta de Telegram</small></span>
+                <ChevronRight className="tf-settings-chevron" />
               </button>
             </div>
           </aside>

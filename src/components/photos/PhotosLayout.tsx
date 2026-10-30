@@ -5,8 +5,11 @@ import {
   Archive,
   ArrowLeft,
   Check,
+  CalendarDays,
+  ChevronRight,
   Download,
   MoreVertical,
+  Plus,
   CloudUpload,
   Smartphone,
   Grid2X2,
@@ -290,34 +293,42 @@ export default function PhotosLayout() {
             <div className="tf-collection-links">
               {(
                 [
-                  { filter: "favorites", icon: Star },
-                  { filter: "videos", icon: Video },
-                  { filter: "archive", icon: Archive },
-                  { filter: "trash", icon: Trash2 },
+                  { filter: "favorites", icon: Star, description: "Tus fotos y videos favoritos" },
+                  { filter: "videos", icon: Video, description: "Todos tus videos" },
+                  { filter: "archive", icon: Archive, description: "Tus archivos guardados" },
                 ] as const
               ).map((item) => (
                 <button
                   key={item.filter}
+                  className={`tf-collection-card tf-collection-${item.filter}`}
                   onClick={() => collection(item.filter)}
                 >
-                  <item.icon />
-                  <span>{labels[item.filter]}</span>
+                  <span className="tf-collection-icon"><item.icon /></span>
+                  <span className="tf-collection-arrow"><ChevronRight /></span>
+                  <strong>{labels[item.filter]}</strong>
+                  <small>{item.description}</small>
                 </button>
               ))}
             </div>
+            <button className="tf-trash-link" onClick={() => collection("trash")}>
+              <span><Trash2 /></span>
+              <strong>Papelera</strong>
+              <ChevronRight />
+            </button>
             <div className="tf-section-title">
               <h2>Álbumes</h2>
-              <small>{albums.length}</small>
+              <span className="tf-album-count">{albums.length}<ChevronRight size={17} /></span>
             </div>
             {albums.length === 0 ? (
               <div className="tf-empty">
-                <Album size={42} />
+                <span className="tf-empty-art"><Images size={46} /></span>
                 <h2>Tus fotos, a tu manera</h2>
                 <p>
                   Selecciona fotos y toca «Añadir a álbum» para crear tu primera
                   colección.
                 </p>
-                <button onClick={() => changeTab("photos")}>
+                <button className="tf-empty-cta" onClick={() => changeTab("photos")}>
+                  <Plus size={20} />
                   Elegir fotos
                 </button>
               </div>
@@ -351,24 +362,11 @@ export default function PhotosLayout() {
               filter === "all" &&
               !album && (
                 <div className="tf-memories">
-                  {albums.slice(0, 3).map((name) => (
-                    <button
-                      className="tf-memory"
-                      key={name}
-                      onClick={() => {
-                        setTab("collections");
-                        collection("all", name);
-                      }}
-                    >
-                      <Album />
-                      <strong>{name}</strong>
-                    </button>
-                  ))}
                   <button
                     className="tf-memory tf-memory-primary"
                     onClick={() => collection("favorites")}
                   >
-                    <Star />
+                  <span className="tf-memory-top"><Star /><span className="tf-memory-arrow"><ChevronRight /></span></span>
                     <strong>Favoritos</strong>
                     <span>Tus fotos y videos favoritos</span>
                   </button>
@@ -376,7 +374,7 @@ export default function PhotosLayout() {
                     className="tf-memory"
                     onClick={() => collection("videos")}
                   >
-                    <Video />
+                  <span className="tf-memory-top"><Video /><span className="tf-memory-arrow"><ChevronRight /></span></span>
                     <strong>Videos</strong>
                     <span>Todos tus videos</span>
                   </button>
@@ -385,7 +383,7 @@ export default function PhotosLayout() {
             <div className="tf-section-title">
               {filter !== "all" || album ? (
                 <button className="tf-back" onClick={() => collection("all")}>
-                  <ArrowLeft size={20} />
+                  <ArrowLeft size={29} />
                   <h1>{album ?? labels[filter]}</h1>
                 </button>
               ) : (
@@ -393,6 +391,7 @@ export default function PhotosLayout() {
               )}
               {album && <button aria-label="Opciones del álbum" onClick={() => setAlbumMenu(true)}><MoreVertical /></button>}
               <button
+                className="tf-grid-view-toggle"
                 aria-label="Cambiar tamaño de cuadrícula"
                 onClick={() =>
                   setColumns(columns === 3 ? 5 : columns === 5 ? 2 : 3)
@@ -403,8 +402,15 @@ export default function PhotosLayout() {
             </div>
             {filter === "trash" && photos.length > 0 && (
               <div className="tf-trash-notice">
-                <p>Al vaciar la papelera se eliminarán definitivamente los archivos de Telegram.</p>
-                <button onClick={() => setTrashAction({ mode: "empty", fileIds: [] })}>Vaciar papelera</button>
+                <div className="tf-trash-notice-icon"><Trash2 size={24} /></div>
+                <div className="tf-trash-notice-body">
+                  <strong>Al vaciar la papelera</strong>
+                  <p>Se eliminarán definitivamente los archivos de Telegram y no podrán ser recuperados.</p>
+                  <button onClick={() => setTrashAction({ mode: "empty", fileIds: [] })}>
+                    <Trash2 size={19} />
+                    Vaciar papelera
+                  </button>
+                </div>
               </div>
             )}
             {loading && (
@@ -414,8 +420,16 @@ export default function PhotosLayout() {
             )}
             {groups.map((group) => (
               <section key={group.key} className="tf-day">
-                <div className="tf-day-heading">
-                  <h2>{group.label}</h2>
+                <div className={`tf-day-heading ${filter === "trash" ? "is-trash" : ""}`}>
+                  <div className="tf-day-label">
+                    {filter !== "trash" && <CalendarDays size={19} aria-hidden="true" />}
+                    <div>
+                      <h2>{group.label}</h2>
+                      {filter === "trash" && selected.size > 0 && (
+                        <small>{group.files.filter((file) => selected.has(file.id)).length} elementos seleccionados</small>
+                      )}
+                    </div>
+                  </div>
                   <button
                     aria-label={`Seleccionar ${group.label}`}
                     onClick={() =>
@@ -529,7 +543,7 @@ export default function PhotosLayout() {
           {filter === "trash" && (
             <button className="tf-delete-action" onClick={() => setTrashAction({ mode: "selected", fileIds: [...selected] })}>
               <Trash2 />
-              <span>Eliminar definitivamente</span>
+              <span>Eliminar</span>
             </button>
           )}
         </div>
