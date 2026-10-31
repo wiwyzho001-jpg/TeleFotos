@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -70,7 +71,15 @@ jobs:
       - name: Prepare release asset
         run: cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk PhoGram.apk
 
+      - name: Upload test APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhoGram-${{ github.ref_name }}-${{ github.run_number }}
+          path: PhoGram.apk
+          retention-days: 7
+
       - name: Publish GitHub release
+        if: github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
           name: PhoGram ${{ github.ref_name }}
