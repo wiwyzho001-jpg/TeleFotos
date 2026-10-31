@@ -61,6 +61,19 @@ internal class BackupArgs {
     var runNow: Boolean = false
     var requestId: String = ""
     var outcome: String = "retry"
+    var storageChannelId: String = ""
+    var metadataChannelId: String = ""
+    var folders: List<String> = emptyList()
+    var allFolders: Boolean = true
+}
+
+@InvokeArg
+internal class NativeAuthArgs {
+    var phone: String = ""
+    var code: String = ""
+    var password: String = ""
+    var apiId: Int = 0
+    var apiHash: String = ""
 }
 
 @InvokeArg
@@ -140,7 +153,12 @@ class MediaLibraryPlugin(private val activity: Activity) : Plugin(activity) {
     @Command fun configurePhotoBackup(invoke: Invoke) {
         try {
             val args = invoke.parseArgs(BackupArgs::class.java)
-            PhotoBackupScheduler.configure(activity, args.phone, args.enabled, args.wifiOnly, args.runNow)
+            if (args.enabled) {
+                require(args.storageChannelId.isNotBlank()) { "Primero conecta la cuenta de Telegram en los ajustes" }
+                NativeTelegram.requireAuthorized(activity.applicationContext, args.phone)
+            }
+            PhotoBackupScheduler.configure(activity, args.phone, args.enabled, args.wifiOnly, args.runNow,
+                args.storageChannelId, args.metadataChannelId, args.folders, args.allFolders)
             invoke.resolve(JSObject().put("scheduled", args.enabled))
         } catch (error: Exception) {
             invoke.reject(error.message ?: "No se pudo programar el respaldo")
@@ -158,6 +176,54 @@ class MediaLibraryPlugin(private val activity: Activity) : Plugin(activity) {
             invoke.resolve(JSObject().put("accepted", PhotoBackupRuntime.complete(args.requestId, outcome)))
         } catch (error: Exception) {
             invoke.reject(error.message ?: "No se pudo actualizar el respaldo")
+        }
+    }
+
+    @Command fun nativeTelegramStatus(invoke: Invoke) {
+        val args = invoke.parseArgs(NativeAuthArgs::class.java)
+        executor.execute {
+            try {
+                val status = NativeTelegram.status(activity.applicationContext, args.phone)
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+            } catch (error: Exception) {
+                invoke.reject(error.message ?: "No se pudo consultar Telegram")
+            }
+        }
+    }
+
+    @Command fun beginNativeTelegramLogin(invoke: Invoke) {
+        val args = invoke.parseArgs(NativeAuthArgs::class.java)
+        executor.execute {
+            try {
+                val status = NativeTelegram.beginLogin(activity.applicationContext, args.phone, args.apiId, args.apiHash)
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+            } catch (error: Exception) {
+                invoke.reject(error.message ?: "No se pudo iniciar la conexión en segundo plano")
+            }
+        }
+    }
+
+    @Command fun submitNativeTelegramCode(invoke: Invoke) {
+        val args = invoke.parseArgs(NativeAuthArgs::class.java)
+        executor.execute {
+            try {
+                val status = NativeTelegram.submitCode(activity.applicationContext, args.code)
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+            } catch (error: Exception) {
+                invoke.reject(error.message ?: "No se pudo verificar el código")
+            }
+        }
+    }
+
+    @Command fun submitNativeTelegramPassword(invoke: Invoke) {
+        val args = invoke.parseArgs(NativeAuthArgs::class.java)
+        executor.execute {
+            try {
+                val status = NativeTelegram.submitPassword(activity.applicationContext, args.password)
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+            } catch (error: Exception) {
+                invoke.reject(error.message ?: "No se pudo verificar la contraseña")
+            }
         }
     }
 

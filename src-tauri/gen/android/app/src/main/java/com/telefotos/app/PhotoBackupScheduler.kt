@@ -16,12 +16,17 @@ internal object PhotoBackupScheduler {
     private const val PERIODIC_WORK = "telefotos-photo-backup-periodic"
     private const val IMMEDIATE_WORK = "telefotos-photo-backup-immediate"
 
-    fun configure(context: Context, phone: String, enabled: Boolean, wifiOnly: Boolean, runNow: Boolean) {
+    fun configure(context: Context, phone: String, enabled: Boolean, wifiOnly: Boolean, runNow: Boolean,
+                  storageChannelId: String, metadataChannelId: String, folders: List<String>, allFolders: Boolean) {
         require(phone.length <= 40 && Regex("^\\+?[0-9]*$").matches(phone)) { "Cuenta de Telegram no válida" }
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
             .putString("phone", phone)
             .putBoolean("enabled", enabled)
             .putBoolean("wifiOnly", wifiOnly)
+            .putString("storageChannelId", storageChannelId)
+            .putString("metadataChannelId", metadataChannelId)
+            .putStringSet("folders", folders.toSet())
+            .putBoolean("allFolders", allFolders)
             .apply()
 
         val manager = WorkManager.getInstance(context)

@@ -21,7 +21,7 @@ pub async fn media_library_command(
     command: String,
     payload: Option<serde_json::Value>,
 ) -> Result<serde_json::Value, String> {
-    if !matches!(command.as_str(), "accessStatus" | "requestAccess" | "listMedia" | "thumbnail" | "prepare" | "release" | "networkStatus" | "share" | "trash" | "configurePhotoBackup" | "completeBackgroundBackup" | "createDownload" | "appendDownload" | "finishDownload" | "abortDownload" | "installUpdate") {
+    if !matches!(command.as_str(), "accessStatus" | "requestAccess" | "listMedia" | "thumbnail" | "prepare" | "release" | "networkStatus" | "share" | "trash" | "configurePhotoBackup" | "completeBackgroundBackup" | "nativeTelegramStatus" | "beginNativeTelegramLogin" | "submitNativeTelegramCode" | "submitNativeTelegramPassword" | "createDownload" | "appendDownload" | "finishDownload" | "abortDownload" | "installUpdate") {
         return Err("Unsupported media operation".into());
     }
     #[cfg(target_os = "android")]

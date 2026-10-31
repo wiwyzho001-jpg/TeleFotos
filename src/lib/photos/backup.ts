@@ -8,26 +8,38 @@ import {
 import { useAuthStore } from "@/stores/authStore";
 import { useFileStore } from "@/stores/fileStore";
 import { processQueue } from "@/lib/upload/uploadManager";
+import {
+  ensureMetadataChannel,
+  getIndexChannelForStorage,
+  getStorageChannelId,
+} from "@/lib/telegram/channelManager";
 import type { TeleFile } from "@/lib/types";
 
 export interface BackupPreferences {
   enabled: boolean;
   wifiOnly: boolean;
+  allFolders: boolean;
   folders: string[];
 }
 const defaults: BackupPreferences = {
   enabled: false,
   wifiOnly: true,
-  folders: ["Camera", "Cámara"],
+  allFolders: true,
+  folders: [],
 };
 function key(phone: string) {
   return `telefotos_backup_${phone}`;
 }
 export function readBackupPreferences(phone: string): BackupPreferences {
   try {
+    const stored = localStorage.getItem(key(phone));
+    if (!stored) return { ...defaults };
+    const parsed = JSON.parse(stored);
     return {
       ...defaults,
-      ...JSON.parse(localStorage.getItem(key(phone)) ?? "{}"),
+      ...parsed,
+      // Existing installs stored an explicit folder list before allFolders existed.
+      allFolders: typeof parsed.allFolders === "boolean" ? parsed.allFolders : false,
     };
   } catch {
     return { ...defaults };
@@ -60,12 +72,27 @@ export function saveBackupPreferences(
   localStorage.setItem(key(phone), JSON.stringify(preferences));
   if (!preferences.enabled) usePhotoBackup.getState().stop();
   if (androidMedia) {
-    return mediaCommand("configurePhotoBackup", {
-      phone,
-      enabled: preferences.enabled,
-      wifiOnly: preferences.wifiOnly,
-      runNow,
-    });
+    return (async () => {
+      const storageChannelId = preferences.enabled
+        ? await getStorageChannelId(phone)
+        : "";
+      if (preferences.enabled && !storageChannelId)
+        throw new Error("No se encontró el canal privado de PhoGram. Abre la galería y vuelve a intentarlo.");
+      const metadataChannelId = preferences.enabled
+        ? getIndexChannelForStorage(storageChannelId!) ??
+          await ensureMetadataChannel(phone, storageChannelId!)
+        : "";
+      return mediaCommand("configurePhotoBackup", {
+        phone,
+        enabled: preferences.enabled,
+        wifiOnly: preferences.wifiOnly,
+        allFolders: preferences.allFolders,
+        runNow,
+        storageChannelId: storageChannelId ?? "",
+        metadataChannelId,
+        folders: preferences.folders,
+      });
+    })();
   }
   return Promise.resolve();
 }

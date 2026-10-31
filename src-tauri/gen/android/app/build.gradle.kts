@@ -19,7 +19,7 @@ android {
     defaultConfig {
         manifestPlaceholders["usesCleartextTraffic"] = "true"
         applicationId = "com.telefotos.app"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
@@ -59,6 +59,8 @@ rust {
 }
 
 dependencies {
+    // Native Telegram client used by WorkManager when the PhoGram WebView is not running.
+    implementation("io.github.tdlib-android:core:0.1.1")
     implementation("androidx.webkit:webkit:1.14.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("androidx.activity:activity-ktx:1.10.1")
