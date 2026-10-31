@@ -223,7 +223,7 @@ export default function PhotoBackupSettings({
           </button>
         )}
         <p className="tf-notice">
-          Android revisa las fotos y videos cada 15 minutos como mínimo y puede demorar la tarea para ahorrar batería. La subida usa una notificación, requiere permiso para todas las fotos y videos, y respeta las carpetas y el límite de Wi-Fi. No se borran los originales.
+          Android revisa las fotos y videos cada 15 minutos como mínimo y puede demorar la tarea para ahorrar batería. Puede mostrar una notificación durante la subida. Requiere permiso para todas las fotos y videos, y respeta las carpetas y el límite de Wi-Fi. No se borran los originales.
         </p>
         {backup.status && (
           <p role="status">{backup.status} · {backup.completed} subidas · {backup.skipped} ya respaldadas</p>

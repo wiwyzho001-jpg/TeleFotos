@@ -50,7 +50,17 @@ class PhotoBackupWorker(context: Context, params: WorkerParameters) : Worker(con
         val allFolders = preferences.getBoolean("allFolders", true)
 
         try {
-            setForegroundAsync(foregroundInfo()).get()
+            // Android 12+ can reject WorkManager's foreground-service promotion
+            // when a periodic job starts after the app has left the foreground.
+            // The scheduled JobService may still run the bounded upload itself.
+            try {
+                setForegroundAsync(foregroundInfo()).get()
+            } catch (error: Exception) {
+                val foregroundStartBlocked = generateSequence(error as Throwable?) { it.cause }
+                    .any { it.javaClass.name == "android.app.ForegroundServiceStartNotAllowedException" }
+                if (!foregroundStartBlocked) throw error
+                android.util.Log.i("PhoGramBackup", "Android blocked foreground promotion; continuing in WorkManager job")
+            }
             // While the WebView is still alive, let the existing GramJS pipeline
             // perform the backup so its normal queue and index handling are used.
             val phone = preferences.getString("phone", "") ?: ""

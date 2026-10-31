@@ -116,7 +116,7 @@ internal object NativeTelegram {
                 val params = TdApi.SetTdlibParameters(
                     false, root.resolve("database").absolutePath, root.resolve("files").absolutePath,
                     databaseKey(context, phone), false, true, true, false, apiId, apiHash,
-                    "es", "PhoGram Android", Build.VERSION.RELEASE, "0.1.8",
+                    "es", "PhoGram Android", Build.VERSION.RELEASE, "0.1.9",
                 )
                 sendAsync(params, "No se pudo preparar Telegram")
             }
