@@ -20,9 +20,10 @@ internal object NativeTelegram {
     @Volatile private var activePhone = ""
     @Volatile private var authState = "disconnected"
     @Volatile private var lastError = ""
+    @Volatile private var authLink = ""
     @Volatile private var parametersReady = false
 
-    data class Status(val state: String, val error: String = "")
+    data class Status(val state: String, val error: String = "", val link: String = "")
 
     fun status(context: Context, expectedPhone: String = ""): Status {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -33,7 +34,7 @@ internal object NativeTelegram {
             try { initialize(context, storedPhone, prefs.getInt("apiId", 0), prefs.getString("apiHash", "") ?: "") }
             catch (error: Exception) { return Status("error", error.message ?: "No se pudo iniciar Telegram en segundo plano") }
         }
-        return Status(authState, lastError)
+        return Status(authState, lastError, authLink)
     }
 
     fun beginLogin(context: Context, phone: String, apiId: Int, apiHash: String): Status {
@@ -42,10 +43,10 @@ internal object NativeTelegram {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         prefs.edit().putInt("apiId", apiId).putString("apiHash", apiHash).putString("phone", phone).apply()
         initialize(context, phone, apiId, apiHash)
-        val current = awaitState(setOf("phone_required", "code_required", "password_required", "ready", "error"), 30)
-        if (current.state == "phone_required") {
-            send(TdApi.SetAuthenticationPhoneNumber(phone, TdApi.PhoneNumberAuthenticationSettings()))
-            return awaitState(setOf("code_required", "password_required", "ready", "error"), 45)
+        val current = awaitState(setOf("phone_required", "code_required", "password_required", "qr_required", "ready", "error"), 30)
+        if (current.state in setOf("phone_required", "code_required", "password_required")) {
+            send(TdApi.RequestQrCodeAuthentication(longArrayOf()))
+            return awaitState(setOf("qr_required", "ready", "error"), 45)
         }
         return current
     }
@@ -96,6 +97,7 @@ internal object NativeTelegram {
             activePhone = phone
             authState = "starting"
             lastError = ""
+            authLink = ""
             parametersReady = false
             client = Client.create({ result -> handleUpdate(context.applicationContext, result, phone, apiId, apiHash) },
                 { error -> if (activePhone == phone) setError(error.message ?: "Error de Telegram") },
@@ -114,13 +116,14 @@ internal object NativeTelegram {
                 val params = TdApi.SetTdlibParameters(
                     false, root.resolve("database").absolutePath, root.resolve("files").absolutePath,
                     databaseKey(context, phone), false, true, true, false, apiId, apiHash,
-                    "es", "PhoGram Android", Build.VERSION.RELEASE, "0.1.7",
+                    "es", "PhoGram Android", Build.VERSION.RELEASE, "0.1.8",
                 )
                 sendAsync(params, "No se pudo preparar Telegram")
             }
             is TdApi.AuthorizationStateWaitPhoneNumber -> setState("phone_required")
             is TdApi.AuthorizationStateWaitCode -> setState("code_required")
             is TdApi.AuthorizationStateWaitPassword -> setState("password_required")
+            is TdApi.AuthorizationStateWaitOtherDeviceConfirmation -> setState("qr_required", state.link)
             is TdApi.AuthorizationStateReady -> setState("ready")
             is TdApi.AuthorizationStateClosing, is TdApi.AuthorizationStateClosed -> setState("closed")
             else -> setState("starting")
@@ -178,9 +181,13 @@ internal object NativeTelegram {
         }
         val state = authState
         if (state !in states) return Status("error", "Telegram tardó demasiado en responder. Inténtalo de nuevo.")
-        return Status(state, lastError)
+        return Status(state, lastError, authLink)
     }
 
-    private fun setState(value: String) { synchronized(lock) { authState = value; lastError = ""; lock.notifyAll() } }
-    private fun setError(value: String) { synchronized(lock) { authState = "error"; lastError = value; lock.notifyAll() } }
+    private fun setState(value: String, link: String = "") {
+        synchronized(lock) { authState = value; lastError = ""; authLink = link; lock.notifyAll() }
+    }
+    private fun setError(value: String) {
+        synchronized(lock) { authState = "error"; lastError = value; authLink = ""; lock.notifyAll() }
+    }
 }

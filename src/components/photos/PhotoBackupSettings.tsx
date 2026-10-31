@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Buffer } from "buffer";
 import { CloudUpload, X } from "lucide-react";
+import { Api } from "telegram";
 import {
   readBackupPreferences,
   runPhotoBackup,
@@ -8,10 +10,11 @@ import {
 } from "@/lib/photos/backup";
 import { androidMedia, mediaCommand, useDeviceStore } from "@/lib/photos/device";
 import { DEFAULT_API_HASH, DEFAULT_API_ID } from "@/lib/telegram/config";
+import { getClient } from "@/lib/telegram/client";
 import { getSecret, VAULT_KEY_API_HASH, VAULT_KEY_API_ID } from "@/lib/secure/vault";
 import { toast } from "sonner";
 
-type NativeTelegramStatus = { state: string; error: string };
+type NativeTelegramStatus = { state: string; error: string; link?: string };
 
 function BackgroundTelegramAuth({
   phone,
@@ -21,8 +24,8 @@ function BackgroundTelegramAuth({
   onReadyChange: (ready: boolean) => void;
 }) {
   const [status, setStatus] = useState<NativeTelegramStatus>({ state: "disconnected", error: "" });
-  const [value, setValue] = useState("");
   const [busy, setBusy] = useState(false);
+  const lastQrLink = useRef("");
 
   useEffect(() => {
     let active = true;
@@ -40,6 +43,29 @@ function BackgroundTelegramAuth({
   }, [phone]);
 
   useEffect(() => onReadyChange(status.state === "ready"), [status.state, onReadyChange]);
+
+  useEffect(() => {
+    const link = status.state === "qr_required" ? status.link : "";
+    if (!link || link === lastQrLink.current) return;
+    lastQrLink.current = link;
+    let active = true;
+    void (async () => {
+      try {
+        const client = getClient();
+        if (!client.connected) await client.connect();
+        const encoded = /[?&]token=([^&]+)/.exec(link)?.[1];
+        if (!encoded) throw new Error("Telegram devolvió un enlace de autorización no válido.");
+        const token = Buffer.from(encoded.replace(/-/g, "+").replace(/_/g, "/"), "base64");
+        await client.invoke(new Api.auth.AcceptLoginToken({ token }));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (!/AUTH_TOKEN_(EXPIRED|INVALID)|TOKEN_(EXPIRED|INVALID)/i.test(message) && active) {
+          setStatus({ state: "error", error: `No se pudo autorizar con la sesión abierta de PhoGram: ${message}` });
+        }
+      }
+    })();
+    return () => { active = false; };
+  }, [status.state, status.link]);
 
   async function connect() {
     setBusy(true);
@@ -62,22 +88,6 @@ function BackgroundTelegramAuth({
     }
   }
 
-  async function submit() {
-    setBusy(true);
-    try {
-      const isPassword = status.state === "password_required";
-      setStatus(await mediaCommand<NativeTelegramStatus>(
-        isPassword ? "submitNativeTelegramPassword" : "submitNativeTelegramCode",
-        isPassword ? { password: value } : { code: value },
-      ));
-      setValue("");
-    } catch (error) {
-      setStatus({ state: "error", error: String(error) });
-    } finally {
-      setBusy(false);
-    }
-  }
-
   if (status.state === "ready") {
     return <p className="tf-notice">Telegram está conectado para respaldar aunque PhoGram esté cerrada.</p>;
   }
@@ -85,28 +95,14 @@ function BackgroundTelegramAuth({
   return (
     <div className="tf-background-telegram">
       <strong>Conexión de Telegram para respaldo en segundo plano</strong>
-      {status.state === "code_required" || status.state === "password_required" ? (
-        <div className="tf-native-auth-row">
-          <input
-            type={status.state === "password_required" ? "password" : "text"}
-            inputMode={status.state === "password_required" ? "text" : "numeric"}
-            autoComplete={status.state === "password_required" ? "current-password" : "one-time-code"}
-            placeholder={status.state === "password_required" ? "Contraseña de Telegram" : "Código de Telegram"}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          />
-          <button className="tf-sheet-row" disabled={busy || !value.trim()} onClick={() => void submit()}>
-            {busy ? "Verificando…" : "Continuar"}
-          </button>
-        </div>
-      ) : (
-        <button className="tf-sheet-row" disabled={busy || !androidMedia} onClick={() => void connect()}>
-          {busy ? "Conectando…" : "Conectar Telegram"}
-        </button>
-      )}
-      {status.state === "starting" && <span>Preparando conexión segura…</span>}
+      <button className="tf-sheet-row" disabled={busy || !androidMedia || status.state === "starting" || status.state === "qr_required"} onClick={() => void connect()}>
+        {busy || status.state === "starting" || status.state === "qr_required"
+          ? "Autorizando con tu sesión actual…"
+          : "Autorizar con la sesión de PhoGram"}
+      </button>
+      {(status.state === "starting" || status.state === "qr_required") && <span>Telegram está vinculando el respaldo con la cuenta ya iniciada. No hace falta otro código.</span>}
       {(status.state === "error" || status.error) && <span role="alert">{status.error}</span>}
-      <span>Telegram enviará un código para autorizar esta sesión de respaldo.</span>
+      <span>Al autorizar, Telegram guardará esta sesión de respaldo en tu dispositivo.</span>
     </div>
   );
 }

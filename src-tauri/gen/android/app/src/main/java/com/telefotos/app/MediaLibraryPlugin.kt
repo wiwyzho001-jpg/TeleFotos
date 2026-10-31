@@ -184,7 +184,7 @@ class MediaLibraryPlugin(private val activity: Activity) : Plugin(activity) {
         executor.execute {
             try {
                 val status = NativeTelegram.status(activity.applicationContext, args.phone)
-                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error).put("link", status.link))
             } catch (error: Exception) {
                 invoke.reject(error.message ?: "No se pudo consultar Telegram")
             }
@@ -196,7 +196,7 @@ class MediaLibraryPlugin(private val activity: Activity) : Plugin(activity) {
         executor.execute {
             try {
                 val status = NativeTelegram.beginLogin(activity.applicationContext, args.phone, args.apiId, args.apiHash)
-                invoke.resolve(JSObject().put("state", status.state).put("error", status.error))
+                invoke.resolve(JSObject().put("state", status.state).put("error", status.error).put("link", status.link))
             } catch (error: Exception) {
                 invoke.reject(error.message ?: "No se pudo iniciar la conexión en segundo plano")
             }
